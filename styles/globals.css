@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bgGradient {
+  background-image: linear-gradient(
+    to right,
+    black,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0.5)
+  );
+}
+
+.playfulFont {
+  font-family: 'Playfair Display', serif;
+}
