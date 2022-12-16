@@ -15,6 +15,7 @@ export default function Layout(props: layoutProps) {
             src={background}
             alt="background image"
             fill
+            priority={true}
             className="select-none object-cover sm:object-[50%_60%] -z-50"
           />
         </div>

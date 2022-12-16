@@ -13,15 +13,39 @@ import dummyImage8 from '../public/tamanna-rumee-eD1RNYzzUxc-unsplash.jpg';
 const DUMMY_DATA = [
   {
     title: 'smartphones',
-    url: [dummyImage1, dummyImage6],
+    url: [
+      dummyImage1,
+      dummyImage3,
+      dummyImage4,
+      dummyImage5,
+      dummyImage6,
+      dummyImage7,
+      dummyImage8,
+    ],
   },
   {
     title: 'clothes',
-    url: [dummyImage2, dummyImage7],
+    url: [
+      dummyImage1,
+      dummyImage3,
+      dummyImage4,
+      dummyImage5,
+      dummyImage6,
+      dummyImage7,
+      dummyImage8,
+    ],
   },
   {
     title: 'footwear',
-    url: [dummyImage1, dummyImage4],
+    url: [
+      dummyImage1,
+      dummyImage3,
+      dummyImage4,
+      dummyImage5,
+      dummyImage6,
+      dummyImage7,
+      dummyImage8,
+    ],
   },
 ];
 
