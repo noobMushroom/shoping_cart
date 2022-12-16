@@ -27,7 +27,7 @@ export default function HomePage(props: PropType) {
             >
               <h1>{product.title}</h1>
             </Link>
-            <div className="flex mx-[0.8rem] overflow-hidden relative  flex items-center  self-center ">
+            <div className="flex mx-[0.8rem] w-full overflow-hidden relative  flex items-center  self-center ">
               {product.url.map((img) => {
                 return (
                   <div
