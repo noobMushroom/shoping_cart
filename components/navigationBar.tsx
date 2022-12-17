@@ -3,9 +3,9 @@ import { useState } from 'react';
 export default function NavigationBar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="w-full fixed shadow-2xl top-0 left-0 bg-black/90 text-white sm:text-5xl justify-between flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[999] pt-[1rem]">
+    <nav className="w-full fixed shadow-2xl top-0 left-0 bg-black/90 text-white sm:text-4xl justify-between flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[999] pt-[1rem]">
       <div>
-        <h1 className=" select-none text-2xl text-rose-600 uppercase sm:font-bold sm:text-6xl">
+        <h1 className=" select-none text-2xl text-rose-600 uppercase sm:font-bold sm:text-4xl">
           Mushroom cart
         </h1>
       </div>

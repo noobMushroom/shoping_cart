@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import uuid from 'react-uuid';
 import Slider from 'react-slick';
+import Background from './StartScreen';
 interface PropType {
   products: [{ title: string; url: string[] }];
 }
@@ -10,7 +11,7 @@ function SamplePrevArrow(props: any) {
   const { className, style, onClick } = props;
   return (
     <div onClick={onClick}>
-      <i className="fa-solid  text-black absolute z-[1000] top-[50%] left-[1rem] hidden sm:block sm:text-5xl fa-circle-chevron-left hover:text-cyan-900/90 duration-300"></i>
+      <i className="fa-solid  text-black absolute z-[10] top-[50%] left-[1rem] hidden sm:block sm:text-5xl fa-circle-chevron-left hover:text-cyan-900/90 duration-300"></i>
     </div>
   );
 }
@@ -32,6 +33,7 @@ export default function HomePage(props: PropType) {
     speed: 500,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    swipeToSlide: true,
     responsive: [
       {
         breakpoint: 480,
@@ -43,12 +45,15 @@ export default function HomePage(props: PropType) {
     ],
   };
   return (
-    <div className="w-[100%] ">
+    <div className="w-[100%]">
+      <div>
+        <Background />
+      </div>
       {props.products.map((product) => {
         return (
           <div
             key={uuid()}
-            className="mb-[0.6rem] relative justify-center flex flex-col border-b-2  py-[1rem] border-stone-900 "
+            className="mb-[0.6rem] sm:w-[80%] m-auto relative justify-center flex flex-col border-b-2  py-[1rem] border-stone-900 "
           >
             <Link
               href={'/'}

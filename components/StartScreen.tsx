@@ -50,7 +50,12 @@ export default function Background() {
       >
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50" />
         <div className="flex flex-col p-[0.5rem] items-center z-50 justify-center">
-          <strong className="text-3xl select-none sm:text-7xl text-white">
+          <div className="mb-[2rem] sm:mb-[4rem]">
+            <strong className="sm:text-8xl text-4xl text-white uppercase select-none text-zinc-100  underline  font-bold">
+              Mushroom
+            </strong>
+          </div>
+          <strong className="text-2xl text-center select-none mb-[2rem] sm:text-7xl text-white">
             Come to Life. Come to Shopping.
           </strong>
           <p className="text-white text-xl select-none  mt-[1rem] sm:text-4xl italic">
