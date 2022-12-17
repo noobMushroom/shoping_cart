@@ -24,7 +24,7 @@ const DUMMY_DATA = [
     ],
   },
   {
-    title: 'clothes',
+    title: 'womens-dresses',
     url: [
       dummyImage1,
       dummyImage3,
@@ -36,7 +36,7 @@ const DUMMY_DATA = [
     ],
   },
   {
-    title: 'footwear',
+    title: 'womens-watches',
     url: [
       dummyImage1,
       dummyImage3,

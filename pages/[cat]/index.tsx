@@ -1,6 +1,7 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import ProductPage from '../../components/ProductPage';
 export interface DataProps {
+  name: string;
   data: {
     products: [
       {
@@ -20,10 +21,9 @@ export interface DataProps {
   };
 }
 export default function Category(data: DataProps) {
-  console.log(data.data.products);
   return (
     <div>
-      <ProductPage data={data.data} />
+      <ProductPage data={data.data} name={data.name} />
     </div>
   );
 }
@@ -50,6 +50,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
       data: res,
+      name: cat,
     },
   };
 };
