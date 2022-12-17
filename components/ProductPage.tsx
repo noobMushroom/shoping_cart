@@ -19,7 +19,7 @@ export default function ProductPage(props: DataProps) {
               />
             </div>
             <div className="flex flex-col w-full">
-              <strong className="text-xl mb-[0.3rem]">{product.brand}</strong>
+              <strong className="text-xl my-[0.5rem]">{product.brand}</strong>
               <h1 className="text-xl font-semibold my-[0.2rem]">
                 {product.title}
               </h1>
