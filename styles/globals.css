@@ -1,6 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.slick-slide {
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.slick-list {
+  margin: 0 2em;
+}
 
 .bgGradient {
   background-image: linear-gradient(
