@@ -18,6 +18,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-uuid": "^2.0.0",
+    "sharp": "^0.31.2",
+    "swiper": "^8.4.5",
     "typescript": "4.9.4"
   },
   "devDependencies": {
