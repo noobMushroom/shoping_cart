@@ -1,13 +1,23 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 export default function NavigationBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+
+  function handleClick(link: string) {
+    router.push(link);
+  }
+
   return (
-    <nav className="w-full fixed shadow-2xl top-0 left-0 bg-black/90 text-white sm:text-4xl justify-between flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[999] pt-[1rem]">
+    <nav className="w-full sticky shadow-2xl top-0 left-0 bg-black/90 text-white sm:text-4xl justify-between flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[999] pt-[1rem]">
       <div>
-        <h1 className=" select-none text-2xl text-rose-600 uppercase sm:font-bold sm:text-4xl">
+        <Link
+          href={'/'}
+          className=" select-none text-2xl text-rose-600 uppercase sm:font-bold sm:text-4xl"
+        >
           Mushroom cart
-        </h1>
+        </Link>
       </div>
       <div className=" sm:w-[30rem] text-white flex items-center justify-between">
         <button onClick={() => setIsOpen(!isOpen)}>
@@ -16,6 +26,10 @@ export default function NavigationBar() {
           ) : (
             <i className="fa-sharp  fa-solid hover:text-cyan-600 duration-300 sm:hidden fa-bars pr-[0.5rem] "></i>
           )}
+        </button>
+
+        <button onClick={() => handleClick('/')}>
+          <i className="fa-solid fa-house hover:text-cyan-600 duration-300 hidden sm:block  pr-[0.5rem]"></i>
         </button>
         <button>
           <i className="fa-solid hidden hover:text-cyan-600 duration-300 hover:opacity-50 sm:block fa-cart-shopping "></i>

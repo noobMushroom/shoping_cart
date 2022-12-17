@@ -9,7 +9,7 @@ interface layoutProps {
 export default function Layout(props: layoutProps) {
   return (
     <Fragment>
-      <header className="relative  flex flex-col justify-center">
+      <header className="relative flex flex-col justify-center">
         <NavigationBar />
       </header>
       <main className="w-full flex justify-center">{props.children}</main>
