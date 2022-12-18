@@ -21,7 +21,7 @@ export default function ProductDetail(data: Props) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await fetch('https://dummyjson.com/products?limit=101');
+  const data = await fetch('https://dummyjson.com/products?limit=98');
   const res = await data.json();
   const allPaths = res.products.map(
     (product: {
