@@ -54,7 +54,6 @@ interface homeProps {
 }
 
 export default function Home(props: homeProps) {
-  const { products } = props;
   return (
     <div className="w-full">
       <Head>

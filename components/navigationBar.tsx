@@ -1,10 +1,15 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useAuth } from '../context/ContextProvider';
 export default function NavigationBar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false); // state to show and close navigation bar;
+  const router = useRouter(); //router to push the links
 
+  const { currentUser } = useAuth(); // current logged in user;
+  console.log(currentUser);
+
+  // handleclick function to push diffrent routes by button click
   function handleClick(link: string) {
     router.push(link);
   }
@@ -20,6 +25,7 @@ export default function NavigationBar() {
         </Link>
       </div>
       <div className=" sm:w-[30rem] text-white flex items-center justify-between">
+        {/* button to toggle menu */}
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
             <i className="fa-solid fa-xmark hover:text-cyan-600 duration-300 sm:hidden fa-bars pr-[0.5rem] "></i>
@@ -28,15 +34,27 @@ export default function NavigationBar() {
           )}
         </button>
 
+        {/* button for home */}
         <button onClick={() => handleClick('/')}>
           <i className="fa-solid fa-house hover:text-cyan-600 duration-300 hidden sm:block  pr-[0.5rem]"></i>
         </button>
-        <button onClick={() => handleClick('/cart')}>
+        {/* button for cart */}
+        <button onClick={() => handleClick('/')}>
           <i className="fa-solid hidden hover:text-cyan-600 duration-300 hover:opacity-50 sm:block fa-cart-shopping "></i>
         </button>
-        <button>
+
+        {/* button for login */}
+        <button
+          onClick={
+            currentUser
+              ? () => handleClick('/userInfo')
+              : () => handleClick('/login')
+          }
+        >
           <i className="fa-solid fa-user hover:text-cyan-600 duration-300 hidden sm:block  pr-[0.5rem]"></i>
         </button>
+
+        {/* div for responsive panel */}
       </div>
       {isOpen && (
         <div className="absolute top-12  duration-300 sm:hidden text-black text-xl text-white flex flex-col items-center left-0 w-full bg-slate-900 flex-1 py-[1rem]">
