@@ -58,7 +58,12 @@ export default function NavigationBar() {
       </div>
       {isOpen && (
         <div className="absolute top-12  duration-300 sm:hidden text-black text-xl text-white flex flex-col items-center left-0 w-full bg-slate-900 flex-1 py-[1rem]">
-          <button className="text-white my-[0.5rem]">Your profile</button>
+          <Link
+            href={currentUser ? '/userInfo' : '/login'}
+            className="text-white my-[0.5rem]"
+          >
+            Your profile
+          </Link>
           <Link
             className="my-[0.5rem] text-white"
             href={'/cart'}
