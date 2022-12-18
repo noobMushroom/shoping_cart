@@ -31,7 +31,7 @@ export default function NavigationBar() {
         <button onClick={() => handleClick('/')}>
           <i className="fa-solid fa-house hover:text-cyan-600 duration-300 hidden sm:block  pr-[0.5rem]"></i>
         </button>
-        <button>
+        <button onClick={() => handleClick('/cart')}>
           <i className="fa-solid hidden hover:text-cyan-600 duration-300 hover:opacity-50 sm:block fa-cart-shopping "></i>
         </button>
         <button>
@@ -41,7 +41,11 @@ export default function NavigationBar() {
       {isOpen && (
         <div className="absolute top-12  duration-300 sm:hidden text-black text-xl text-white flex flex-col items-center left-0 w-full bg-slate-900 flex-1 py-[1rem]">
           <button className="text-white my-[0.5rem]">Your profile</button>
-          <Link className="my-[0.5rem] text-white" href={'/'}>
+          <Link
+            className="my-[0.5rem] text-white"
+            href={'/cart'}
+            onClick={() => setIsOpen(false)}
+          >
             Your cart
           </Link>
           <Link className="my-[0.5rem] text-white" href={'/'}>
