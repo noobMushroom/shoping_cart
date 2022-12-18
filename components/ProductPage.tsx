@@ -1,7 +1,14 @@
 import Image from 'next/image';
 import uuid from 'react-uuid';
+import { useRouter } from 'next/router';
 import { DataProps } from '../pages/[cat]';
 export default function ProductPage(props: DataProps) {
+  const router = useRouter();
+
+  function handleClick(category: string, id: number) {
+    router.push(`/${category}/${id}`);
+  }
+
   return (
     <div>
       <div className=" text-center sm:text-5xl sm:my-[1.5rem] playfulFont text-black text-2xl my-[1rem] capitalize font-bold">
@@ -41,7 +48,10 @@ export default function ProductPage(props: DataProps) {
                   <i className="fa-solid fa-circle-plus mr-[0.5rem] text-xl"></i>
                   Add to cart
                 </button>
-                <button className="w-full bg-red-600 flex items-center sm:hover:scale-110 duration-300 sm:hover:bg-red-500 rounded-full justify-center shadow-2xl ">
+                <button
+                  onClick={() => handleClick(product.category, product.id)}
+                  className="w-full bg-red-600 flex items-center sm:hover:scale-110 duration-300 sm:hover:bg-red-500 rounded-full justify-center shadow-2xl "
+                >
                   <i className="fa-solid fa-circle-info mr-[0.5rem] text-xl "></i>
                   See Details
                 </button>
