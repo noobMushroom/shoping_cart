@@ -7,7 +7,6 @@ export default function NavigationBar() {
   const router = useRouter(); //router to push the links
 
   const { currentUser } = useAuth(); // current logged in user;
-  console.log(currentUser);
 
   // handleclick function to push diffrent routes by button click
   function handleClick(link: string) {

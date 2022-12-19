@@ -1,20 +1,25 @@
 import Image from 'next/image';
 import uuid from 'react-uuid';
 import { useRouter } from 'next/router';
+import { useShoppingList } from '../context/ShoppingList';
 import { DataProps } from '../pages/[cat]';
+
 export default function ProductPage(props: DataProps) {
   const router = useRouter();
+  const { shoppingList, addProduct, reduceProduct } = useShoppingList(); // accessing functions to update product values;
 
   function handleClick(category: string, id: number) {
     router.push(`/${category}/${id}`);
   }
+
+  console.log(shoppingList);
 
   return (
     <div>
       <div className=" text-center sm:text-5xl sm:my-[1.5rem] playfulFont text-black text-2xl my-[1rem] capitalize font-bold">
         {props.name}
       </div>
-      {props.data.products.map((product) => {
+      {props.data.map((product) => {
         return (
           <div
             key={uuid()}
@@ -24,6 +29,7 @@ export default function ProductPage(props: DataProps) {
               <Image
                 src={product.thumbnail}
                 fill
+                priority={false}
                 alt={product.title}
                 className="object-contain"
               />
@@ -44,7 +50,10 @@ export default function ProductPage(props: DataProps) {
               </div>
 
               <div className="flex w-full h-[2.5rem] my-[0.5rem] sm:my-[1rem] ">
-                <button className="w-full mx-[0.5rem] flex items-center sm:hover:scale-110 duration-300 sm:hover:bg-cyan-500 rounded-full justify-center bg-cyan-600 shadow-2xl">
+                <button
+                  onClick={() => addProduct(product)}
+                  className="w-full mx-[0.5rem] flex items-center sm:hover:scale-110 duration-300 sm:hover:bg-cyan-500 rounded-full justify-center bg-cyan-600 shadow-2xl"
+                >
                   <i className="fa-solid fa-circle-plus mr-[0.5rem] text-xl"></i>
                   Add to cart
                 </button>

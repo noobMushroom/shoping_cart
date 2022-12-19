@@ -2,23 +2,22 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import ProductPage from '../../components/ProductPage';
 export interface DataProps {
   name: string;
-  data: {
-    products: [
-      {
-        brand: string;
-        description: string;
-        discountPercentage: string;
-        id: number;
-        images: string[];
-        title: string;
-        thumbnail: string;
-        stock: string;
-        rating: number;
-        price: number;
-        category: string;
-      }
-    ];
-  };
+  data: [
+    {
+      count: number;
+      brand: string;
+      description: string;
+      discountPercentage: string;
+      id: number;
+      images: string[];
+      title: string;
+      thumbnail: string;
+      stock: string;
+      rating: number;
+      price: number;
+      category: string;
+    }
+  ];
 }
 export default function Category(data: DataProps) {
   return (
@@ -47,9 +46,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const data = await fetch(`https://dummyjson.com/products/category/${cat}`);
   const res = await data.json();
 
+  const products = res.products.map((product: any) => {
+    return {
+      ...product,
+      count: 0,
+    };
+  });
+
+  console.log(products);
+
   return {
     props: {
-      data: res,
+      data: products,
       name: cat,
     },
   };
