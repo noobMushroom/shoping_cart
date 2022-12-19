@@ -1,6 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import ProductDetails from '../../components/ProductDetail';
-export interface Props {
+interface Props {
   data: {
     brand: string;
     description: string;

@@ -4,7 +4,6 @@ export interface DataProps {
   name: string;
   data: [
     {
-      count: number;
       brand: string;
       description: string;
       discountPercentage: string;
@@ -49,7 +48,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const products = res.products.map((product: any) => {
     return {
       ...product,
-      count: 0,
     };
   });
 

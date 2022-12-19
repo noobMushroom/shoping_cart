@@ -67,6 +67,7 @@ export default function ShoppingListProvider(
   // fetching todos
 
   useEffect(() => {
+    setShoppingList({});
     if (currentUser) {
       const fetchData = async () => {
         try {
@@ -87,10 +88,9 @@ export default function ShoppingListProvider(
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [currentUser]);
 
   async function addProduct(product: Product) {
-    const userRef = doc(db, 'users', currentUser.uid);
     if (!(product.id in shoppingList)) {
       setShoppingList((prevState) => ({
         ...prevState,
@@ -98,6 +98,7 @@ export default function ShoppingListProvider(
       }));
       try {
         if (!currentUser) return;
+        const userRef = doc(db, 'users', currentUser.uid);
         await setDoc(
           userRef,
           {
@@ -121,6 +122,7 @@ export default function ShoppingListProvider(
       }));
       try {
         if (!currentUser) return;
+        const userRef = doc(db, 'users', currentUser.uid);
         await setDoc(
           userRef,
           {
@@ -138,7 +140,6 @@ export default function ShoppingListProvider(
 
   //function to reduce the number of items in the list
   async function reduceProduct(product: Product) {
-    const userRef = doc(db, 'users', currentUser.uid);
     if (product.id in shoppingList && shoppingList[product.id].count > 0) {
       const updatedProduct = {
         ...product,
@@ -150,6 +151,7 @@ export default function ShoppingListProvider(
       }));
       try {
         if (!currentUser) return;
+        const userRef = doc(db, 'users', currentUser.uid);
         await setDoc(
           userRef,
           {

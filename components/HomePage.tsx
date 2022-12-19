@@ -56,6 +56,7 @@ export default function HomePage(props: PropType) {
             className="mb-[0.6rem] sm:w-[80%] m-auto relative justify-center flex flex-col border-b-2  py-[1rem] border-stone-900 "
           >
             <Link
+              id="start"
               href={`/${product.title}`}
               className="text-xl text-sky-900 font-bold underline flex items-center playfulFont capitalize mb-[0.3rem]"
             >

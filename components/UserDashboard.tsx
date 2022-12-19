@@ -1,7 +1,10 @@
 import { useAuth } from '../context/ContextProvider';
 import CartPage from './CartPage';
+
 export default function UserDashBoard() {
   const { logout, currentUser } = useAuth();
+
+  if (!currentUser) return <></>;
   return (
     <div className="text-white w-[100vw] p-[1rem] sm:mt-[2rem] sm:w-[60rem] sm:m-auto flex flex-col">
       <div className="flex items-center">

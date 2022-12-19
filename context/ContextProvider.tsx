@@ -50,8 +50,8 @@ export default function Context(props: ContextProps) {
   }
 
   function logout() {
-    router.push('/');
     signOut(auth);
+    router.push('/');
   }
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function Context(props: ContextProps) {
     });
 
     return unsubscribe;
-  }, []);
+  }, [currentUser]);
 
   const value = {
     currentUser,

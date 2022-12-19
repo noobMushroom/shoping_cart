@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 interface images {
@@ -7,6 +8,12 @@ export default function Background() {
   const [urls, setUrls] = useState<images[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loading, setIsLoading] = useState(true);
+
+  const router = useRouter();
+
+  const handleClick = (link: string) => {
+    router.push(link);
+  };
 
   // getting picutres url
   useEffect(() => {
@@ -58,7 +65,7 @@ export default function Background() {
     <div>
       <div
         style={bgImage}
-        className="w-full relative bg-no-repeat object-center bg-cover playfulFont h-screen flex items-center justify-center duration-300 transistion ease-in "
+        className="w-full flex-col relative bg-no-repeat object-center bg-cover playfulFont h-screen flex items-center justify-center duration-300 transistion ease-in "
       >
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50" />
         <div className="flex flex-col p-[0.5rem] items-center z-50 justify-center">
@@ -73,6 +80,14 @@ export default function Background() {
           <p className="text-white text-xl select-none  mt-[1rem] sm:text-4xl italic">
             Place for Everyone
           </p>
+          <div>
+            <button
+              onClick={() => handleClick('#start')}
+              className="mt-[3rem] shadow-2xl sm:text-2xl sm:p-[0.8rem] sm:font-bold bg-cyan-600 p-[0.5rem] rounded-md text-xl text-white duration-300 relative sm:after:absolute after:top-0 after:right-full sm:after:bg-rose-600 z-50 after:-z-10 after:w-full after:h-full overflow-hidden hover:after:translate-x-full after:duration-300 hover:text-black"
+            >
+              Start Shopping
+            </button>
+          </div>
         </div>
       </div>
     </div>

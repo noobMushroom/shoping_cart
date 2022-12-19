@@ -13,8 +13,6 @@ export default function ProductPage(props: DataProps) {
     router.push(`/${category}/${id}`);
   }
 
-  console.log(shoppingList);
-
   return (
     <div>
       <div className=" text-center  sm:text-5xl sm:my-[1.5rem] playfulFont text-white text-2xl my-[1rem] capitalize font-bold">
