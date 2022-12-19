@@ -3,10 +3,11 @@ import uuid from 'react-uuid';
 import { useRouter } from 'next/router';
 import { useShoppingList } from '../context/ShoppingList';
 import { DataProps } from '../pages/[cat]';
+import Stars from './Ratings';
 
 export default function ProductPage(props: DataProps) {
   const router = useRouter();
-  const { shoppingList, addProduct, reduceProduct } = useShoppingList(); // accessing functions to update product values;
+  const { shoppingList, addProduct } = useShoppingList(); // accessing functions to update product values;
 
   function handleClick(category: string, id: number) {
     router.push(`/${category}/${id}`);
@@ -16,7 +17,7 @@ export default function ProductPage(props: DataProps) {
 
   return (
     <div>
-      <div className=" text-center sm:text-5xl sm:my-[1.5rem] playfulFont text-black text-2xl my-[1rem] capitalize font-bold">
+      <div className=" text-center  sm:text-5xl sm:my-[1.5rem] playfulFont text-white text-2xl my-[1rem] capitalize font-bold">
         {props.name}
       </div>
       {props.data.map((product) => {
@@ -46,7 +47,15 @@ export default function ProductPage(props: DataProps) {
                 <p>Discount: {product.discountPercentage}%</p>
               </div>
               <div>
-                <p>Rating: {product.rating}</p>
+                <Stars num={product.rating} />
+              </div>
+              <div className="flex text-xl">
+                <p className="mr-[0.5rem]">Item in cart: </p>
+                {shoppingList[product.id] ? (
+                  <h1>{shoppingList[product.id].count}</h1>
+                ) : (
+                  <h1>0</h1>
+                )}
               </div>
 
               <div className="flex w-full h-[2.5rem] my-[0.5rem] sm:my-[1rem] ">

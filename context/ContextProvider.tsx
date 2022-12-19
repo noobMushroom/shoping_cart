@@ -50,8 +50,8 @@ export default function Context(props: ContextProps) {
   }
 
   function logout() {
-    signOut(auth);
     router.push('/');
+    signOut(auth);
   }
 
   useEffect(() => {

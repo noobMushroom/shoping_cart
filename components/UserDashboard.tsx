@@ -1,4 +1,5 @@
 import { useAuth } from '../context/ContextProvider';
+import CartPage from './CartPage';
 export default function UserDashBoard() {
   const { logout, currentUser } = useAuth();
   return (
@@ -24,7 +25,7 @@ export default function UserDashBoard() {
         Logout
       </button>
       <div>
-        <h1>carts</h1>
+        <CartPage />
       </div>
     </div>
   );

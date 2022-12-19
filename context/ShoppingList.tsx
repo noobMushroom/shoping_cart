@@ -4,7 +4,7 @@ import { doc, setDoc, deleteField, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
 // interface for product props
-interface Product {
+export interface Product {
   count: number;
   brand: string;
   description: string;
@@ -44,6 +44,7 @@ interface ShoppingListPorviderInterface {
 interface ShoppingListInterface {
   addProduct: (args0: Product) => void;
   reduceProduct: (args0: Product) => void;
+  handleDelete: (args0: Product) => void;
   shoppingList: StateProps;
   loading: boolean;
   error: string | null;
@@ -77,7 +78,7 @@ export default function ShoppingListProvider(
             setShoppingList({});
           }
         } catch (err) {
-          console.log('failed to load cart');
+          setError('failed to load cart');
         } finally {
           setLoading(false);
         }
@@ -138,7 +139,7 @@ export default function ShoppingListProvider(
   //function to reduce the number of items in the list
   async function reduceProduct(product: Product) {
     const userRef = doc(db, 'users', currentUser.uid);
-    if (product.id in shoppingList && product.count > 0) {
+    if (product.id in shoppingList && shoppingList[product.id].count > 0) {
       const updatedProduct = {
         ...product,
         count: shoppingList[product.id].count - 1,
@@ -164,12 +165,31 @@ export default function ShoppingListProvider(
     }
   }
 
+  async function handleDelete(product: Product) {
+    const tempObj = { ...shoppingList };
+    delete tempObj[product.id];
+    setShoppingList(tempObj);
+    if (currentUser) {
+      const userRef = doc(db, 'users', currentUser.uid);
+      await setDoc(
+        userRef,
+        {
+          cart: {
+            [product.id]: deleteField(),
+          },
+        },
+        { merge: true }
+      );
+    }
+  }
+
   const values = {
     addProduct,
     reduceProduct,
     shoppingList,
     loading,
     error,
+    handleDelete,
   };
 
   return (

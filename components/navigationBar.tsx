@@ -18,6 +18,7 @@ export default function NavigationBar() {
       <div>
         <Link
           href={'/'}
+          onClick={() => setIsOpen(false)}
           className=" select-none text-2xl text-rose-600 uppercase sm:font-bold sm:text-4xl"
         >
           Mushroom cart
@@ -38,7 +39,7 @@ export default function NavigationBar() {
           <i className="fa-solid fa-house hover:text-cyan-600 duration-300 hidden sm:block  pr-[0.5rem]"></i>
         </button>
         {/* button for cart */}
-        <button onClick={() => handleClick('/')}>
+        <button onClick={() => handleClick('/cart')}>
           <i className="fa-solid hidden hover:text-cyan-600 duration-300 hover:opacity-50 sm:block fa-cart-shopping "></i>
         </button>
 

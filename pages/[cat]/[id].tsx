@@ -16,8 +16,12 @@ export interface Props {
   };
 }
 
-export default function ProductDetail(data: Props) {
-  return <ProductDetails data={data.data} />;
+export default function ProductDetail(props: Props) {
+  return (
+    <div>
+      <ProductDetails data={props.data} />
+    </div>
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -75,7 +79,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       category: string;
     }) => product.id.toString() === id
   );
-
   return {
     props: {
       data: product,

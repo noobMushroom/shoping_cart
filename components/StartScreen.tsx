@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 
+interface images {
+  url: string;
+}
 export default function Background() {
-  const [urls, setUrls] = useState<string[]>([]);
-  const [currentSlide, setCurrentSlide] = useState(1);
+  const [urls, setUrls] = useState<images[]>([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [loading, setIsLoading] = useState(true);
 
   // getting picutres url
   useEffect(() => {
@@ -13,14 +17,16 @@ export default function Background() {
     }`;
 
     const picturesData = async () => {
-      setUrls(['']);
       try {
         const data = await fetch(url).then((res) => res.json());
-        data.results.map((pic: any) =>
-          setUrls((perv) => [...perv, pic.urls.regular])
-        );
+        const formattedData = data.results.map((pic: any) => ({
+          url: pic.urls.regular,
+        }));
+        setUrls(formattedData);
       } catch (err) {
         console.log(err);
+      } finally {
+        setIsLoading(false);
       }
     };
     picturesData();
@@ -28,8 +34,8 @@ export default function Background() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (currentSlide === 30) {
-        setCurrentSlide(1);
+      if (currentSlide === 29) {
+        setCurrentSlide(0);
       } else {
         setCurrentSlide(currentSlide + 1);
       }
@@ -38,15 +44,21 @@ export default function Background() {
     return () => clearTimeout(timer);
   }, [currentSlide]);
 
+  if (loading)
+    return (
+      <div className="w-[100vw] min-h-screen flex items-center justify-center">
+        <i className="fa-solid animate-spin fa-spinner-third text-8xl"></i>
+      </div>
+    );
   const bgImage = {
-    backgroundImage: `url(${urls[currentSlide]})`,
+    backgroundImage: `url(${urls[currentSlide].url})`,
   };
 
   return (
     <div>
       <div
         style={bgImage}
-        className="w-full relative bg-no-repeat bg-cover playfulFont h-screen flex items-center justify-center duration-300 transistion ease-in "
+        className="w-full relative bg-no-repeat object-center bg-cover playfulFont h-screen flex items-center justify-center duration-300 transistion ease-in "
       >
         <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50" />
         <div className="flex flex-col p-[0.5rem] items-center z-50 justify-center">

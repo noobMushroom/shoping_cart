@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import uuid from 'react-uuid';
 import Slider from 'react-slick';
-import { Props } from '../pages/[cat]/[id]';
+import { useShoppingList } from '../context/ShoppingList';
 import Stars from './Ratings';
+
 // fucntions for the arrow of slider
 function SamplePrevArrow(props: any) {
   const { className, style, onClick } = props;
@@ -21,6 +22,23 @@ function SampleNextArrow(props: any) {
     </div>
   );
 }
+
+interface Props {
+  data: {
+    brand: string;
+    description: string;
+    discountPercentage: string;
+    id: number;
+    images: string[];
+    title: string;
+    thumbnail: string;
+    stock: string;
+    rating: number;
+    price: number;
+    category: string;
+  };
+}
+
 export default function ProductDetails(data: Props) {
   const settings = {
     infinite: true,
@@ -40,8 +58,9 @@ export default function ProductDetails(data: Props) {
       },
     ],
   };
+  const { addProduct, reduceProduct, shoppingList } = useShoppingList();
   return (
-    <div className="sm:w-[80%] w-full p-[0.5rem] text-white mt-0 min-h-screen mt-[1rem]">
+    <div className="sm:w-[80%] w-[100vw] p-[0.5rem] text-white mt-0 min-h-screen mt-[1rem]">
       <div className="text-center">
         <strong className="capitalize text-xl sm:text-4xl sm:my-[1rem] playfulFont">
           {data.data.title}
@@ -86,11 +105,17 @@ export default function ProductDetails(data: Props) {
         <Stars num={data.data.rating} />
       </div>
       <div className="flex items-center ml-[1rem] sm:my-[1rem] ">
-        <button>
+        <button onClick={() => addProduct(data.data)}>
           <i className="fa-solid text-4xl mr-[0.5rem] sm:hover:text-orange-500 duration-300 sm:hover:opacity-50 sm:text-5xl text-orange-600 fa-circle-plus"></i>
         </button>
-        <h1 className="text-4xl mr-[0.5rem] sm:text-5xl">0</h1>
-        <button>
+        {shoppingList[data.data.id] ? (
+          <h1 className="text-4xl mr-[0.5rem] sm:text-5xl">
+            {shoppingList[data.data.id].count}
+          </h1>
+        ) : (
+          <h1 className="text-4xl mr-[0.5rem] sm:text-5xl">0</h1>
+        )}
+        <button onClick={() => reduceProduct(data.data)}>
           <i className="fa-solid text-4xl text-blue-600 sm:hover:text-sky-500 duration-300 sm:hover:opacity-50 sm:text-5xl fa-circle-minus"></i>
         </button>
       </div>
