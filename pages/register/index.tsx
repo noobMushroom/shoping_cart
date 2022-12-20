@@ -1,4 +1,12 @@
 import RegisterPage from '../../components/RegisterPage';
+import Head from 'next/head';
 export default function Register() {
-  return <RegisterPage />;
+  return (
+    <div>
+      <Head>
+        <title>Register</title>
+      </Head>
+      <RegisterPage />;
+    </div>
+  );
 }

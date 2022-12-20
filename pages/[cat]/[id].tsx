@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
+import Head from 'next/head';
 import ProductDetails from '../../components/ProductDetail';
 interface Props {
   data: {
@@ -20,6 +21,9 @@ interface Props {
 export default function ProductDetail(props: Props) {
   return (
     <div>
+      <Head>
+        <title>{props.data.title}</title>
+      </Head>
       <ProductDetails data={props.data} />
     </div>
   );

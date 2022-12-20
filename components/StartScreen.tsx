@@ -78,7 +78,7 @@ export default function Background() {
             Come to Life. Come to Shopping.
           </strong>
           <p className="text-white text-xl select-none  mt-[1rem] sm:text-4xl italic">
-            Place for Everyone
+            Start building your dream cart today!
           </p>
           <div>
             <button

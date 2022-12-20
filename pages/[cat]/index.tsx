@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
+import Head from 'next/head';
 import ProductPage from '../../components/ProductPage';
 export interface DataProps {
   name: string;
@@ -22,6 +23,14 @@ export interface DataProps {
 export default function Category(data: DataProps) {
   return (
     <div>
+      <Head>
+        <title>{data.name}</title>
+        <meta
+          name="description"
+          content="Our  selection is second to none. With a variety of styles, brands, and price points to choose from, you're sure to find the perfect for your needs. Whether you're shopping for  or just looking to add to your collection, we've got you covered. Browse through our selection today and find the perfect for you!"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <ProductPage data={data.data} name={data.name} />
     </div>
   );
