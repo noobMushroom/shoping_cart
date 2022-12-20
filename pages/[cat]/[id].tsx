@@ -2,6 +2,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import ProductDetails from '../../components/ProductDetail';
 interface Props {
   data: {
+    count: number;
     brand: string;
     description: string;
     discountPercentage: string;
@@ -29,6 +30,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const res = await data.json();
   const allPaths = res.products.map(
     (product: {
+      count: number;
       brand: string;
       description: string;
       discountPercentage: string;
@@ -66,6 +68,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const res = await data.json();
   const product = res.products.find(
     (product: {
+      count: number;
       brand: string;
       description: string;
       discountPercentage: string;
@@ -81,7 +84,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   );
   return {
     props: {
-      data: product,
+      data: { ...product, count: 0 },
     },
   };
 };

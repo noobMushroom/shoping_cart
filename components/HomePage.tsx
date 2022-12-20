@@ -3,6 +3,7 @@ import Link from 'next/link';
 import uuid from 'react-uuid';
 import Slider from 'react-slick';
 import Background from './StartScreen';
+import { useRouter } from 'next/router';
 interface PropType {
   products: [{ title: string; url: string[] }];
 }
@@ -44,6 +45,8 @@ export default function HomePage(props: PropType) {
       },
     ],
   };
+
+  const router = useRouter();
   return (
     <div className="w-[100%]">
       <div>
@@ -53,12 +56,12 @@ export default function HomePage(props: PropType) {
         return (
           <div
             key={uuid()}
-            className="mb-[0.6rem] sm:w-[80%] m-auto relative justify-center flex flex-col border-b-2  py-[1rem] border-stone-900 "
+            className="mb-[0.3rem] mx-[0.5rem] sm:m-auto sm:w-[80%] relative justify-center flex flex-col border-b-2  py-[1rem] border-white "
           >
             <Link
               id="start"
               href={`/${product.title}`}
-              className="text-xl text-sky-900 font-bold underline flex items-center playfulFont capitalize mb-[0.3rem]"
+              className="text-xl text-cyan-600 ml-[0.5rem] sm:ml-[0] font-bold underline flex items-center playfulFont capitalize mb-[0.3rem]"
             >
               <h1>{product.title}</h1>
             </Link>
@@ -68,6 +71,7 @@ export default function HomePage(props: PropType) {
                   <div
                     key={uuid()}
                     className="relative sm:mx-[1rem] h-[12rem] sm:h-[18rem]"
+                    onClick={() => router.push(`/${product.title}`)}
                   >
                     <Image
                       src={img}

@@ -9,7 +9,7 @@ interface Values {
   password: string;
 }
 export default function LoginForm() {
-  const { login } = useAuth();
+  const { login, error, set } = useAuth();
   const [show, setShow] = useState(false);
   const formik = useFormik({
     initialValues: {
@@ -29,25 +29,39 @@ export default function LoginForm() {
       <h1 className="text-white sm:mb-[4rem] sm:text-5xl  mb-[3rem] font-bold text-3xl playfulFont">
         Login
       </h1>
+      <span className="mb-[1rem]">
+        {error ? (
+          <span className="text-xl text-red-400 sm:text-2xl">{error}</span>
+        ) : (
+          <></>
+        )}
+      </span>
       <form onSubmit={formik.handleSubmit} className="mx-[0.5rem]">
-        <div>
+        <div className="mb-[1rem] flex flex-col">
           <input
             type="email"
             placeholder="Email"
             {...formik.getFieldProps('email')}
-            className="w-full mb-[1rem] p-[0.5rem] rounded-lg focus:border-cyan-600 outline-none text-white playfulFont bg-slate-900 border-4 text-xl border-zinc-500"
+            className="w-full  p-[0.5rem] rounded-lg focus:border-cyan-600 outline-none text-white playfulFont bg-slate-900 border-4 text-xl border-zinc-500"
           />
+          {formik.errors.email && formik.touched.email ? (
+            <span className="text-red-500 w-full text-center">
+              {formik.errors.email}
+            </span>
+          ) : (
+            <></>
+          )}
         </div>
-        <div className="relative">
+        <div className="relative flex flex-col mb-[1rem]">
           <input
             type={show ? 'text' : 'password'}
             placeholder="password"
             {...formik.getFieldProps('password')}
-            className="w-full mb-[1rem] p-[0.5rem] sm:w-[30rem] text-white rounded-lg playfulFont focus:border-cyan-600 outline-none bg-slate-900 border-4 text-xl border-zinc-500"
+            className="w-full p-[0.5rem] sm:w-[30rem] text-white rounded-lg playfulFont focus:border-cyan-600 outline-none bg-slate-900 border-4 text-xl border-zinc-500"
           />
           <div
             onClick={() => setShow(!show)}
-            className="absolute top-[50%] cursor-pointer translate-y-[-70%] text-2xl text-zinc-200 right-[1rem]"
+            className="absolute top-[0.5rem] cursor-pointer text-2xl text-zinc-200 right-[1rem]"
           >
             {show ? (
               <i className="fa-solid fa-eye-slash"></i>
@@ -55,6 +69,13 @@ export default function LoginForm() {
               <i className="fa-sharp fa-solid fa-eye"></i>
             )}
           </div>
+          {formik.errors.password && formik.touched.password ? (
+            <span className="text-red-500 w-full text-center">
+              {formik.errors.password}
+            </span>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="flex justify-center items-center">
           <button
@@ -67,7 +88,7 @@ export default function LoginForm() {
       </form>
       <div className="flex mt-[2rem] text-xl">
         <p className="text-white mr-[0.5rem]">Don&#39;t have an account</p>
-        <Link href={'/register'} className="text-teal-700">
+        <Link href={'/register'} onClick={set} className="text-teal-700">
           Register
         </Link>
       </div>

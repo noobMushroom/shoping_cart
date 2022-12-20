@@ -14,6 +14,8 @@ interface AuthContext {
   login: (email: string, password: string) => void;
   signup: (email: string, password: string, displayName: string) => void;
   logout: () => void;
+  error: string | null;
+  set: () => void;
 }
 
 const AuthContext = React.createContext({} as AuthContext);
@@ -29,24 +31,53 @@ export default function Context(props: ContextProps) {
   const router = useRouter();
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  function set() {
+    setError('');
+  }
 
   async function signup(email: string, password: string, displayName: string) {
     try {
-      await createUserWithEmailAndPassword(auth, email, password).catch((err) =>
-        console.log(err)
-      );
+      await createUserWithEmailAndPassword(auth, email, password)
+        .catch((err) => {
+          const errCode = err.code;
+          switch (errCode) {
+            case 'auth/email-already-in-use':
+              throw new Error('User already Exist');
+          }
+        })
+        .then(() => {
+          setError('');
+          router.push('/');
+        });
       await updateProfile(auth.currentUser!, {
         displayName: displayName,
       }).catch((err) => console.log(err));
-      router.push('/');
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      setError(err.message);
     }
   }
 
-  function login(email: string, password: string) {
-    signInWithEmailAndPassword(auth, email, password);
-    router.push('/');
+  async function login(email: string, password: string) {
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+        .catch((err) => {
+          const errCode = err.code;
+          switch (errCode) {
+            case 'auth/user-not-found':
+              throw new Error('user not found');
+            case 'auth/wrong-password':
+              throw new Error('wrong password');
+          }
+        })
+        .then(() => {
+          setError(null);
+          router.push('/');
+        });
+    } catch (err: any) {
+      setError(err.message);
+    }
   }
 
   function logout() {
@@ -68,6 +99,8 @@ export default function Context(props: ContextProps) {
     login,
     signup,
     logout,
+    error,
+    set,
   };
 
   return (

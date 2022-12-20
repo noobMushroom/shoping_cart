@@ -25,6 +25,7 @@ function SampleNextArrow(props: any) {
 
 interface Props {
   data: {
+    count: number;
     brand: string;
     description: string;
     discountPercentage: string;

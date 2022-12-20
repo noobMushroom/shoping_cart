@@ -3,7 +3,9 @@ import { useShoppingList } from '../context/ShoppingList';
 import uuid from 'react-uuid';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 export default function CartPage() {
+  const router = useRouter();
   const { shoppingList, loading, addProduct, reduceProduct, handleDelete } =
     useShoppingList();
   const { currentUser } = useAuth();
@@ -14,6 +16,10 @@ export default function CartPage() {
       bill += shoppingList[product].price * shoppingList[product].count;
     });
     return bill;
+  }
+
+  function handleClick(category: string, id: number) {
+    router.push(`/${category}/${id}`);
   }
 
   if (loading) return <div>Loading....</div>;
@@ -114,10 +120,22 @@ export default function CartPage() {
                     </button>
                   </div>
                 </div>
-                <div className="self-center">
+                <div className="self-center flex justify-between w-full">
+                  <button
+                    onClick={() =>
+                      handleClick(
+                        shoppingList[product].category,
+                        shoppingList[product].id
+                      )
+                    }
+                    className="p-[0.2rem] w-[8rem] rounded-md mr-[0.5rem] sm:mt-[1.5rem] sm:p-[0.5rem] sm:text-xl sm:hover:opacity-50 duration-300 text-bold bg-cyan-600 mt-[0.7rem] text-center "
+                  >
+                    <i className="fa-solid fa-circle-info mr-[0.5rem]"></i>
+                    Details
+                  </button>
                   <button
                     onClick={() => handleDelete(shoppingList[product])}
-                    className="p-[0.2rem] w-[10rem] rounded-md sm:mt-[1.5rem] sm:p-[0.5rem] sm:text-xl sm:hover:opacity-50 duration-300 text-bold bg-red-600 mt-[0.7rem] text-center"
+                    className="p-[0.2rem] w-[8rem] rounded-md sm:mt-[1.5rem] sm:p-[0.5rem] sm:text-xl sm:hover:opacity-50 duration-300 text-bold bg-red-600 mt-[0.7rem] text-center"
                   >
                     Delete<i className=" ml-[0.5rem] fa-solid fa-trash-can"></i>
                   </button>

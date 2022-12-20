@@ -6,7 +6,7 @@ export default function NavigationBar() {
   const [isOpen, setIsOpen] = useState(false); // state to show and close navigation bar;
   const router = useRouter(); //router to push the links
 
-  const { currentUser } = useAuth(); // current logged in user;
+  const { currentUser, logout } = useAuth(); // current logged in user;
 
   // handleclick function to push diffrent routes by button click
   function handleClick(link: string) {
@@ -61,6 +61,7 @@ export default function NavigationBar() {
           <Link
             href={currentUser ? '/userInfo' : '/login'}
             className="text-white my-[0.5rem]"
+            onClick={() => setIsOpen(false)}
           >
             Your profile
           </Link>
@@ -74,7 +75,15 @@ export default function NavigationBar() {
           <Link className="my-[0.5rem] text-white" href={'/'}>
             About us
           </Link>
-          <button className="my-[0.5rem] text-white">logout</button>
+          <button
+            onClick={() => {
+              logout();
+              setIsOpen(false);
+            }}
+            className="my-[0.5rem] text-white"
+          >
+            logout
+          </button>
         </div>
       )}
     </nav>
