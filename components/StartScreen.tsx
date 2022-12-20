@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface images {
   url: string;
@@ -57,17 +58,21 @@ export default function Background() {
         <i className="fa-solid animate-spin fa-spinner-third text-8xl"></i>
       </div>
     );
-  const bgImage = {
-    backgroundImage: `url(${urls[currentSlide].url})`,
-  };
-
   return (
     <div>
-      <div
-        style={bgImage}
-        className="w-full flex-col relative bg-no-repeat object-center bg-cover playfulFont h-screen flex items-center justify-center duration-300 transistion ease-in "
-      >
-        <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50" />
+      <div className="w-full flex-col relative playfulFont h-screen flex items-center justify-center duration-300 transistion ease-in ">
+        <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-10" />
+        <div className="absolute top-0 left-0 right-0 bottom-0 ">
+          <div className="relative w-full h-full">
+            <Image
+              src={urls[currentSlide].url}
+              alt="something"
+              fill
+              priority={false}
+              className="object-cover duration-300 transistion ease-in object-center"
+            />
+          </div>
+        </div>
         <div className="flex flex-col p-[0.5rem] items-center z-50 justify-center">
           <div className="mb-[2rem] sm:mb-[4rem]">
             <strong className="sm:text-8xl text-4xl text-white uppercase select-none text-zinc-100  underline  font-bold">

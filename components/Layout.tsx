@@ -1,5 +1,6 @@
 import NavigationBar from './navigationBar';
 import { Fragment } from 'react';
+import Footer from './Footer';
 interface layoutProps {
   children: React.ReactNode;
 }
@@ -12,6 +13,7 @@ export default function Layout(props: layoutProps) {
       <main className="w-full min-h-screen bg-stone-900 flex justify-center">
         {props.children}
       </main>
+      <Footer />
     </Fragment>
   );
 }

@@ -58,7 +58,7 @@ export default function CartPage() {
           return (
             <div
               key={uuid()}
-              className="mt-[1rem] mb-[1rem] bg-slate-800 p-[1rem] rounded-md shadow-2xl flex sm:flex-row sm: items-start sm:justify-start flex-col"
+              className="mt-[1rem] mb-[1rem] bg-slate-800 p-[1rem] rounded-md sm:p-[2rem] shadow-2xl flex sm:flex-row sm: items-start sm:justify-start flex-col"
             >
               <div className="relative h-[12rem] sm:h-[15rem] sm:mr-[1rem] rounded-lg w-full">
                 <Image
@@ -120,7 +120,7 @@ export default function CartPage() {
                     </button>
                   </div>
                 </div>
-                <div className="self-center flex justify-between w-full">
+                <div className="self-center flex justify-between sm:justify-center w-full">
                   <button
                     onClick={() =>
                       handleClick(
@@ -128,7 +128,7 @@ export default function CartPage() {
                         shoppingList[product].id
                       )
                     }
-                    className="p-[0.2rem] w-[8rem] rounded-md mr-[0.5rem] sm:mt-[1.5rem] sm:p-[0.5rem] sm:text-xl sm:hover:opacity-50 duration-300 text-bold bg-cyan-600 mt-[0.7rem] text-center "
+                    className="p-[0.2rem] w-[8rem] rounded-md mr-[0.5rem] sm:mr-[2rem] sm:mt-[1.5rem] sm:p-[0.5rem] sm:text-xl sm:hover:opacity-50 duration-300 text-bold bg-cyan-600 mt-[0.7rem] text-center "
                   >
                     <i className="fa-solid fa-circle-info mr-[0.5rem]"></i>
                     Details

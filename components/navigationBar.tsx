@@ -43,7 +43,7 @@ export default function NavigationBar() {
         {/* button for cart */}
         <button onClick={() => handleClick('/cart')} className="relative">
           <i className="fa-solid hidden hover:text-cyan-600 duration-300 hover:opacity-50 sm:block fa-cart-shopping "></i>
-          <h1 className="absolute top-[-0.5rem] right-[-0.5rem] font-bold text-md w-[1.5rem] h-[1.5rem] rounded-full bg-sky-600 flex items-center justify-center">
+          <h1 className="absolute hidden sm:block top-[-0.5rem] right-[-0.5rem] font-bold text-sm w-[1.5rem] h-[1.5rem] rounded-full bg-sky-600 flex items-center justify-center">
             {Object.keys(shoppingList).length}
           </h1>
         </button>

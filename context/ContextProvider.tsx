@@ -1,5 +1,5 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { auth, db } from '../firebase';
+import React, { useContext, useState, useEffect } from 'react';
+import { auth } from '../firebase';
 import { useRouter } from 'next/router';
 import {
   signInWithEmailAndPassword,
@@ -7,6 +7,7 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 
 interface AuthContext {
@@ -16,6 +17,7 @@ interface AuthContext {
   logout: () => void;
   error: string | null;
   set: () => void;
+  resetEmail: (email: string) => void;
 }
 
 const AuthContext = React.createContext({} as AuthContext);
@@ -80,6 +82,16 @@ export default function Context(props: ContextProps) {
     }
   }
 
+  async function resetEmail(email: string) {
+    try {
+      await sendPasswordResetEmail(auth, email).catch((err) => {
+        console.log(err);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   function logout() {
     signOut(auth);
     router.push('/');
@@ -101,6 +113,7 @@ export default function Context(props: ContextProps) {
     logout,
     error,
     set,
+    resetEmail,
   };
 
   return (

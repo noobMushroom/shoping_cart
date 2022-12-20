@@ -77,6 +77,7 @@ export default function HomePage(props: PropType) {
                       src={img}
                       alt=""
                       fill
+                      priority={false}
                       className="object-cover sm:object-[50%_50%]"
                     />
                   </div>
