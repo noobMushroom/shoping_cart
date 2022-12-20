@@ -46,7 +46,7 @@ export default function RegisterPage() {
       ) : (
         <></>
       )}
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="w-full mx-[0.5rem]">
         <div className="flex flex-col mb-[1rem]">
           <input
             type="text"

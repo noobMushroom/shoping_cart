@@ -36,7 +36,7 @@ export default function LoginForm() {
           <></>
         )}
       </span>
-      <form onSubmit={formik.handleSubmit} className="mx-[0.5rem]">
+      <form onSubmit={formik.handleSubmit} className="w-full mx-[0.5rem]">
         <div className="mb-[1rem] flex flex-col">
           <input
             type="email"
