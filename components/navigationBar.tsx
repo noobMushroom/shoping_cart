@@ -49,16 +49,26 @@ export default function NavigationBar() {
         </button>
 
         {/* button for login */}
-        <button
-          onClick={
-            currentUser
-              ? () => handleClick('/userInfo')
-              : () => handleClick('/login')
-          }
-        >
-          <i className="fa-solid fa-user hover:text-cyan-600 duration-300 hidden sm:block  pr-[0.5rem]"></i>
-        </button>
-
+        <div className="flex items-center">
+          <button
+            onClick={
+              currentUser
+                ? () => handleClick('/userInfo')
+                : () => handleClick('/login')
+            }
+          >
+            <i className="fa-solid fa-user hover:text-cyan-600 duration-300 hidden sm:block  pr-[0.5rem]"></i>
+          </button>
+          <div className="ml-[0.5rem]">
+            {currentUser ? (
+              <span className="text-md hidden sm:block">
+                {currentUser.displayName}
+              </span>
+            ) : (
+              <span className="text-base  hidden sm:block">Guest</span>
+            )}
+          </div>
+        </div>
         {/* div for responsive panel */}
       </div>
       {isOpen && (
@@ -68,16 +78,23 @@ export default function NavigationBar() {
             className="text-white my-[0.5rem]"
             onClick={() => setIsOpen(false)}
           >
-            Your profile
+            {currentUser ? currentUser.displayName : 'Login'}
           </Link>
           <Link
             className="my-[0.5rem] flex items-center text-white"
             href={'/cart'}
             onClick={() => setIsOpen(false)}
           >
-            Your cart <h1>{Object.keys(shoppingList).length}</h1>
+            <i className="fa-solid fa-cart-shopping"></i>
+            <h1 className="ml-[0.5rem]">
+              {Object.keys(shoppingList).length} items
+            </h1>
           </Link>
-          <Link className="my-[0.5rem] text-white" href={'/'}>
+          <Link
+            onClick={() => setIsOpen(false)}
+            className="my-[0.5rem] text-white"
+            href={'/aboutUs'}
+          >
             About us
           </Link>
           <button
@@ -87,7 +104,7 @@ export default function NavigationBar() {
             }}
             className="my-[0.5rem] text-white"
           >
-            logout
+            {currentUser ? 'Logout' : <></>}
           </button>
         </div>
       )}

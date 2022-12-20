@@ -24,7 +24,7 @@ export default function CartPage() {
 
   if (loading) return <div>Loading....</div>;
   return (
-    <div className="w-[100vw] p-[1rem] min-h-screen mt-[1rem] sm:w-[60rem] sm:m-auto relative">
+    <div className="w-[100vw] p-[1rem] mt-[3rem] sm:mt-[5rem] min-h-screen mt-[1rem] sm:w-[60rem] sm:m-auto relative">
       {currentUser ? (
         <></>
       ) : (

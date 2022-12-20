@@ -6,7 +6,7 @@ export default function UserDashBoard() {
 
   if (!currentUser) return <></>;
   return (
-    <div className="text-white w-[100vw] mt-[1rem] p-[0rem] sm:mt-[2rem] sm:w-[60rem] sm:m-auto flex flex-col">
+    <div className="text-white w-[100vw] mt-[5rem] p-[0rem] sm:mt-[8rem] sm:mt-[2rem] sm:w-[60rem] sm:m-auto flex flex-col">
       <div className="flex items-center px-[0.5rem]">
         <h1 className="text-2xl mr-[0.5rem] text-orange-600 sm:mr-[1rem] text-white sm:mb-[1rem] sm:text-4xl sm:font-bold">
           username:

@@ -28,7 +28,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <section className="w-[100vw] sm:w-full  min-h-screen flex flex-col items-center justify-center p-[0.5rem]">
+    <section className="w-[100vw] sm:w-full sm:mt-[2rem]  min-h-screen flex flex-col items-center justify-center p-[0.5rem]">
       <h1 className="text-white mb-[3rem] sm:mb-[4rem] sm:text-5xl sm:font-extrabold font-bold text-3xl playfulFont">
         Registration Page
       </h1>
