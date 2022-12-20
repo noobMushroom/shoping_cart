@@ -42,7 +42,7 @@ export default function LoginForm() {
             type="email"
             placeholder="Email"
             {...formik.getFieldProps('email')}
-            className="w-full  p-[0.5rem] rounded-lg focus:border-cyan-600 outline-none text-white playfulFont bg-slate-900 border-4 text-xl border-zinc-500"
+            className="w-full  p-[0.5rem] sm:w-[30rem] rounded-lg focus:border-cyan-600 outline-none text-white playfulFont bg-slate-900 border-4 text-xl border-zinc-500"
           />
           {formik.errors.email && formik.touched.email ? (
             <span className="text-red-500 w-full text-center">
@@ -61,7 +61,7 @@ export default function LoginForm() {
           />
           <div
             onClick={() => setShow(!show)}
-            className="absolute top-[0.5rem] cursor-pointer text-2xl text-zinc-200 right-[1rem]"
+            className="absolute top-[0.5rem] cursor-pointer text-2xl sm:right-[2rem] text-zinc-200 right-[1rem]"
           >
             {show ? (
               <i className="fa-solid fa-eye-slash"></i>

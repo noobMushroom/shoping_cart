@@ -87,7 +87,7 @@ export default function RegisterPage() {
           />
           <div
             onClick={() => setShow({ ...show, password: !show.password })}
-            className="absolute top-[0.5rem] cursor-pointer text-2xl text-zinc-200 right-[1rem]"
+            className="absolute top-[0.5rem] cursor-pointer text-2xl sm:right-[2rem] text-zinc-200 right-[1rem]"
           >
             {show.password ? (
               <i className="fa-solid fa-eye-slash"></i>
@@ -115,7 +115,7 @@ export default function RegisterPage() {
             onClick={() =>
               setShow({ ...show, confirmPassword: !show.confirmPassword })
             }
-            className="absolute top-[0.5rem] cursor-pointer  text-2xl text-zinc-200 right-[1rem]"
+            className="absolute top-[0.5rem] sm:right-[2rem] cursor-pointer  text-2xl text-zinc-200 right-[1rem]"
           >
             {show.confirmPassword ? (
               <i className="fa-solid fa-eye-slash"></i>
