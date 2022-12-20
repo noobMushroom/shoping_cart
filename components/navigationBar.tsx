@@ -2,8 +2,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useAuth } from '../context/ContextProvider';
+import { useShoppingList } from '../context/ShoppingList';
 export default function NavigationBar() {
   const [isOpen, setIsOpen] = useState(false); // state to show and close navigation bar;
+  const { shoppingList } = useShoppingList();
   const router = useRouter(); //router to push the links
 
   const { currentUser, logout } = useAuth(); // current logged in user;
@@ -14,7 +16,7 @@ export default function NavigationBar() {
   }
 
   return (
-    <nav className="w-full sticky  shadow-2xl top-0 left-0 bg-black/90 text-white sm:text-4xl justify-between flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[999] pt-[1rem]">
+    <nav className="w-full fixed top-0 left-0 shadow-2xl top-0 left-0 bg-black/90 text-white sm:text-4xl justify-between flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[999] pt-[1rem]">
       <div>
         <Link
           href={'/'}
@@ -28,9 +30,9 @@ export default function NavigationBar() {
         {/* button to toggle menu */}
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
-            <i className="fa-solid fa-xmark hover:text-cyan-600 duration-300 sm:hidden fa-bars pr-[0.5rem] "></i>
+            <i className="fa-solid fa-xmark sm:hidden fa-bars pr-[0.5rem] "></i>
           ) : (
-            <i className="fa-sharp  fa-solid hover:text-cyan-600 duration-300 sm:hidden fa-bars pr-[0.5rem] "></i>
+            <i className="fa-sharp  fa-solid sm:hidden fa-bars pr-[0.5rem] "></i>
           )}
         </button>
 
@@ -39,8 +41,11 @@ export default function NavigationBar() {
           <i className="fa-solid fa-house hover:text-cyan-600 duration-300 hidden sm:block  pr-[0.5rem]"></i>
         </button>
         {/* button for cart */}
-        <button onClick={() => handleClick('/cart')}>
+        <button onClick={() => handleClick('/cart')} className="relative">
           <i className="fa-solid hidden hover:text-cyan-600 duration-300 hover:opacity-50 sm:block fa-cart-shopping "></i>
+          <h1 className="absolute top-[-0.5rem] right-[-0.5rem] font-bold text-md w-[1.5rem] h-[1.5rem] rounded-full bg-sky-600 flex items-center justify-center">
+            {Object.keys(shoppingList).length}
+          </h1>
         </button>
 
         {/* button for login */}
@@ -66,11 +71,11 @@ export default function NavigationBar() {
             Your profile
           </Link>
           <Link
-            className="my-[0.5rem] text-white"
+            className="my-[0.5rem] flex items-center text-white"
             href={'/cart'}
             onClick={() => setIsOpen(false)}
           >
-            Your cart
+            Your cart <h1>{Object.keys(shoppingList).length}</h1>
           </Link>
           <Link className="my-[0.5rem] text-white" href={'/'}>
             About us

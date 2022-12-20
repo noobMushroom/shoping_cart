@@ -1,8 +1,5 @@
 import NavigationBar from './navigationBar';
-import background from '../public/pexels-cup-of-couple-6956903.jpg';
-import Image from 'next/image';
 import { Fragment } from 'react';
-import Background from './StartScreen';
 interface layoutProps {
   children: React.ReactNode;
 }

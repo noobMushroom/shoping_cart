@@ -53,8 +53,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
   });
 
-  console.log(products);
-
   return {
     props: {
       data: products,

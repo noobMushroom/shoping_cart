@@ -14,7 +14,7 @@ export default function ProductPage(props: DataProps) {
   }
 
   return (
-    <div>
+    <div className="mt-[5rem] sm:mt-[6rem]">
       <div className=" text-center  sm:text-5xl sm:my-[1.5rem] playfulFont text-white text-2xl my-[1rem] capitalize font-bold">
         {props.name}
       </div>

@@ -40,7 +40,7 @@ export default function CartPage() {
           </div>
         </div>
       )}
-      <div className="flex w-full border-2 border-orange-600 sm:px-[1rem] sticky sm:text-3xl top-2 left-0 bg-stone-800 z-50 rounded-md p-[0.5rem] justify-between items-center">
+      <div className="flex w-full border-2 border-orange-600 sm:px-[1rem] sticky sm:text-3xl top-[3.7rem] sm:top-[4.5rem] left-0 bg-stone-800 z-50 rounded-md p-[0.5rem] justify-between items-center">
         <h1>
           <i className="fa-solid fa-cart-shopping mr-[0.5rem] sm:mr-[1rem]"></i>
           Your Cart
