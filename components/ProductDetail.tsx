@@ -61,7 +61,7 @@ export default function ProductDetails(data: Props) {
   };
   const { addProduct, reduceProduct, shoppingList } = useShoppingList();
   return (
-    <div className="sm:w-[60rem] w-[100vw] p-[0.5rem] text-white mt-0 min-h-screen mt-[5rem] sm:mt-[6rem]">
+    <div className="sm:w-[60rem] w-[100vw] p-[0.5rem] text-white mt-0 min-h-screen mt-[5.5rem] sm:mt-[6rem]">
       <div className="text-center">
         <strong className="capitalize text-xl sm:text-4xl sm:my-[1rem] playfulFont">
           {data.data.title}
