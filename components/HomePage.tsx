@@ -12,7 +12,7 @@ function SamplePrevArrow(props: any) {
   const { className, style, onClick } = props;
   return (
     <div onClick={onClick}>
-      <i className="fa-solid  text-black absolute z-[10] top-[50%] left-[1rem] hidden sm:block sm:text-5xl fa-circle-chevron-left hover:text-cyan-900/90 duration-300"></i>
+      <i className="fa-solid text-black absolute z-[10] top-[50%] left-[1rem] text-2xl sm:block sm:text-5xl fa-circle-chevron-left sm:hover:text-cyan-900/90 duration-300"></i>
     </div>
   );
 }
@@ -21,7 +21,7 @@ function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
   return (
     <div onClick={onClick}>
-      <i className="fa-solid absolute top-[50%] right-[1rem] text-black sm:text-5xl hidden sm:block fa-circle-chevron-right hover:text-cyan-900/90 duration-300"></i>
+      <i className="fa-solid absolute top-[50%] right-[1rem] text-black sm:text-5xl text-2xl sm:block fa-circle-chevron-right sm:hover:text-cyan-900/90 duration-300"></i>
     </div>
   );
 }
