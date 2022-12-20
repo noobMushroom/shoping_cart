@@ -82,7 +82,7 @@ export default function Background() {
           <strong className="text-2xl text-center select-none mb-[2rem] sm:text-7xl text-white">
             Come to Life. Come to Shopping.
           </strong>
-          <p className="text-white text-xl select-none  mt-[1rem] sm:text-4xl italic">
+          <p className="text-white text-xl text-center select-none  mt-[1rem] sm:text-4xl italic">
             Start building your dream cart today!
           </p>
           <div>
