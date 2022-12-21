@@ -1,97 +1,47 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import bgImage from '../public/two-friends-chilling-white-floor-studio.jpg';
 
-interface images {
-  url: string;
-}
 export default function Background() {
-  const [urls, setUrls] = useState<images[]>([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [loading, setIsLoading] = useState(true);
-
   const router = useRouter();
-
   const handleClick = (link: string) => {
     router.push(link);
   };
-
-  // getting picutres url
-  useEffect(() => {
-    setIsLoading(true);
-    const url = `https://api.unsplash.com/search/photos/?client_id=${
-      process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY
-    }&query=shopping&per_page=30&order_by=popular&orientation=landscape&page=${
-      Math.floor(Math.random() * 2) + 1
-    }`;
-
-    const picturesData = async () => {
-      try {
-        const data = await fetch(url).then((res) => res.json());
-        const formattedData = data.results.map((pic: any) => ({
-          url: pic.urls.regular,
-        }));
-        setUrls(formattedData);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    picturesData();
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (currentSlide === 29) {
-        setCurrentSlide(0);
-      } else {
-        setCurrentSlide(currentSlide + 1);
-      }
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, [currentSlide]);
-
-  if (loading)
-    return (
-      <div className="w-[100vw] text-black min-h-screen flex items-center justify-center">
-        <i className="fa-solid animate-spin fa-spinner-third text-8xl"></i>
-      </div>
-    );
   return (
-    <div>
-      <div className="w-full flex-col relative playfulFont h-screen flex items-center justify-center duration-300 transistion ease-in ">
-        <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/50 z-10" />
+    <div className="text-stone-900">
+      <div className="w-full flex-col sm:mt-[3.5rem] relative playfulFont h-screen flex justify-center duration-300 transistion ease-in ">
+        <div className="absolute top-0 left-0 right-0 bottom-0 z-10 bg-black/2" />
         <div className="absolute top-0 left-0 right-0 bottom-0 ">
           <div className="relative w-full h-full">
             <Image
-              src={urls[currentSlide].url}
-              alt="something"
+              src={bgImage}
+              alt="pictures"
               fill
               priority={false}
-              className="object-cover duration-300 transistion ease-in object-center"
+              className="object-cover duration-300 transistion ease-in object-[43%_10%] sm:object-[50%_30%]"
             />
           </div>
         </div>
-        <div className="flex flex-col p-[0.5rem] items-center z-50 justify-center">
+        <div className="flex flex-col sm:ml-[2rem] z-50 ">
           <div className="mb-[2rem] sm:mb-[4rem]">
-            <strong className="sm:text-8xl text-4xl text-white uppercase select-none text-zinc-100  underline  font-bold">
-              Mushroom
-            </strong>
+            <h3 className="sm:text-2xl text-xl text-center sm:text-start uppercase select-none font-semibold sm:font-bold">
+              new arrivals
+            </h3>
+            <h1 className="sm:text-6xl sm:font-black font-black text-2xl text-center mt-[1rem] sm:text-start uppercase">
+              Amazing winter collection
+            </h1>
+            <p className="text-xs select-none  mt-[1rem] hidden sm:block sm:text-sm italic sm:w-[35rem]">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco labori
+            </p>
           </div>
-          <strong className="text-2xl text-center select-none mb-[2rem] sm:text-7xl text-white">
-            Come to Life. Come to Shopping.
-          </strong>
-          <p className="text-white text-xl text-center select-none  mt-[1rem] sm:text-4xl italic">
-            Start building your dream cart today!
-          </p>
-          <div>
+          <div className="self-center sm:self-start sm:mt-[0] mt-[4rem]">
             <button
               onClick={() => handleClick('#start')}
-              className="mt-[3rem] shadow-2xl sm:text-2xl sm:p-[0.8rem] sm:font-bold bg-cyan-600 p-[0.5rem] rounded-md text-xl text-white duration-300 relative sm:after:absolute after:top-0 after:right-full sm:after:bg-rose-600 z-50 after:-z-10 after:w-full after:h-full overflow-hidden hover:after:translate-x-full after:duration-300 hover:text-black"
+              className="sm:w-[8rem] sm:p-[1rem] uppercase p-[0.8rem] font-bold text-lg sm:text-base sm:hover:bg-stone-900 sm:duration-300 sm:hover:text-white border-2 border-stone-900"
             >
-              Start Shopping
+              shop now
             </button>
           </div>
         </div>

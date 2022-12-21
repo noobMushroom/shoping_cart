@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+* {
+  font-family: 'Arimo', sans-serif;
+}
 .slick-slide {
   padding: 0 10px;
   box-sizing: border-box;
@@ -22,4 +25,8 @@
 
 .playfulFont {
   font-family: 'Playfair Display', serif;
+}
+
+.arimoFont {
+  font-family: 'Arimo', sans-serif;
 }
