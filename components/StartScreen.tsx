@@ -18,6 +18,7 @@ export default function Background() {
 
   // getting picutres url
   useEffect(() => {
+    setIsLoading(true);
     const url = `https://api.unsplash.com/search/photos/?client_id=${
       process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY
     }&query=shopping&per_page=30&order_by=popular&orientation=landscape&page=${
@@ -54,7 +55,7 @@ export default function Background() {
 
   if (loading)
     return (
-      <div className="w-[100vw] min-h-screen flex items-center justify-center">
+      <div className="w-[100vw] text-black min-h-screen flex items-center justify-center">
         <i className="fa-solid animate-spin fa-spinner-third text-8xl"></i>
       </div>
     );
