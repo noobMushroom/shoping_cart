@@ -6,7 +6,7 @@ export default function Register() {
       <Head>
         <title>Register</title>
       </Head>
-      <RegisterPage />;
+      <RegisterPage />
     </div>
   );
 }

@@ -33,6 +33,7 @@ export default function LoginForm() {
           <Image
             src={bgImage}
             fill
+            priority={false}
             alt="side picture"
             className="object-cover"
           ></Image>
