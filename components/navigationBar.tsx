@@ -16,61 +16,84 @@ export default function NavigationBar() {
   }
 
   return (
-    <nav className="w-full fixed top-0 left-0 shadow-xl top-0 left-0 bg-zinc-100 text-white sm:text-4xl justify-between flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[999] pt-[1rem]">
+    <nav className="w-full sm:h-[5rem] fixed top-0 left-0 shadow-xl top-0 left-0 bg-zinc-100 text-black flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[999] pt-[1rem]">
       <div>
         <Link
           href={'/'}
           onClick={() => setIsOpen(false)}
-          className=" select-none text-2xl text-rose-600 uppercase sm:font-bold sm:text-4xl"
+          className=" select-none text-2xl text-rose-600 uppercase sm:font-bold sm:text-xl"
         >
-          Mushroom cart
+          Simply Stylish
         </Link>
       </div>
-      <div className=" sm:w-[30rem] text-white flex items-center justify-between">
+      <ul className="sm:m-auto sm:grow  flex items-center justify-around">
         {/* button to toggle menu */}
-        <button onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? (
-            <i className="fa-solid fa-xmark sm:hidden fa-bars pr-[0.5rem] "></i>
-          ) : (
-            <i className="fa-sharp  fa-solid sm:hidden fa-bars pr-[0.5rem] "></i>
-          )}
-        </button>
+        <li>
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? (
+              <i className="fa-solid fa-xmark sm:hidden fa-bars pr-[0.5rem] "></i>
+            ) : (
+              <i className="fa-sharp  fa-solid sm:hidden fa-bars pr-[0.5rem] "></i>
+            )}
+          </button>
+        </li>
 
-        {/* button for home */}
-        <button onClick={() => handleClick('/')}>
-          <i className="fa-solid fa-house hover:text-cyan-600 duration-300 hidden sm:block  pr-[0.5rem]"></i>
-        </button>
+        <li>
+          <Link
+            href="/"
+            className="hover:text-rose-600 text-sm uppercase duration-100 hidden sm:block font-semibold"
+          >
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/"
+            className="hover:text-rose-600 text-sm uppercase duration-100 hidden sm:block font-semibold"
+          >
+            shop
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/"
+            className="hover:text-rose-600 text-sm uppercase duration-100 font-semibold hidden sm:block"
+          >
+            Contact
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/"
+            className="hover:text-rose-600 text-sm uppercase duration-100 font-semibold  hidden sm:block"
+          >
+            About
+          </Link>
+        </li>
         {/* button for cart */}
         <button onClick={() => handleClick('/cart')} className="relative">
-          <i className="fa-solid hidden hover:text-cyan-600 duration-300 hover:opacity-50 sm:block fa-cart-shopping "></i>
-          <h1 className="absolute hidden sm:block top-[-0.5rem] right-[-0.5rem] font-bold text-sm w-[1.5rem] h-[1.5rem] rounded-full bg-sky-600 flex items-center justify-center">
+          <i className="fa-solid hidden hover:text-red-600 duration-300 sm:block fa-cart-shopping "></i>
+          <h1 className="absolute hidden sm:block top-[-1.1rem] right-[-1.1rem] font-bold text-sm w-[1.2rem] text-white h-[1.2rem] rounded-full bg-red-600 flex items-center justify-center">
             {Object.keys(shoppingList).length}
           </h1>
         </button>
 
         {/* button for login */}
         <div className="flex items-center">
-          <button
-            onClick={
-              currentUser
-                ? () => handleClick('/userInfo')
-                : () => handleClick('/login')
-            }
-          >
-            <i className="fa-solid fa-user hover:text-cyan-600 duration-300 hidden sm:block  pr-[0.5rem]"></i>
-          </button>
           <div className="ml-[0.5rem]">
             {currentUser ? (
-              <span className="text-md hidden sm:block">
-                {currentUser.displayName}
-              </span>
+              <button onClick={() => handleClick('/userInfo')}>
+                <i className="fa-solid fa-user hover:text-red-600 duration-300 hidden sm:block"></i>
+              </button>
             ) : (
-              <span className="text-base  hidden sm:block">Guest</span>
+              <button className="uppercase text-sm w-[7rem] mr-auto hover:text-red-600 hover:border-red-600 font-bold hidden sm:block border-2 border-zinc-900  p-[0.5rem]">
+                login
+              </button>
             )}
           </div>
         </div>
         {/* div for responsive panel */}
-      </div>
+      </ul>
       {isOpen && (
         <div className="absolute top-12  duration-300 sm:hidden text-black text-xl text-white flex flex-col items-center left-0 w-full bg-slate-900 flex-1 py-[1rem]">
           <Link

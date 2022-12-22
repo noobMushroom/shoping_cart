@@ -18,16 +18,16 @@ export default function Background() {
               alt="pictures"
               fill
               priority={false}
-              className="object-cover duration-300 transistion ease-in object-[43%_10%] sm:object-[50%_30%]"
+              className="object-cover duration-300 transistion ease-in object-[43%_10%] sm:object-[50%_10%]"
             />
           </div>
         </div>
         <div className="flex flex-col sm:ml-[2rem] z-50 ">
-          <div className="mb-[2rem] sm:mb-[4rem]">
-            <h3 className="sm:text-2xl text-xl text-center sm:text-start uppercase select-none font-semibold sm:font-bold">
+          <div className="mb-[2rem] sm:ml-[3rem] sm:mb-[4rem]">
+            <h3 className="sm:text-2xl text-xl  text-center sm:text-start uppercase select-none font-semibold sm:font-bold">
               new arrivals
             </h3>
-            <h1 className="sm:text-6xl sm:font-black font-black text-2xl text-center mt-[1rem] sm:text-start uppercase">
+            <h1 className="sm:text-6xl text-[#1d1b28] sm:font-black font-black text-2xl text-center mt-[1rem] sm:text-start uppercase">
               Amazing winter collection
             </h1>
             <p className="text-xs select-none  mt-[1rem] hidden sm:block sm:text-sm italic sm:w-[35rem]">
@@ -39,7 +39,7 @@ export default function Background() {
           <div className="self-center sm:self-start sm:mt-[0] mt-[4rem]">
             <button
               onClick={() => handleClick('#start')}
-              className="sm:w-[8rem] sm:p-[1rem] uppercase p-[0.8rem] font-bold text-lg sm:text-base sm:hover:bg-stone-900 sm:duration-300 sm:hover:text-white border-2 border-stone-900"
+              className="sm:w-[8rem] sm:ml-[3rem] sm:hover:shadow-2xl sm:p-[1rem] uppercase p-[0.8rem] font-bold text-lg sm:text-base sm:hover:bg-stone-900 sm:duration-300 sm:hover:text-white border-2 border-stone-900"
             >
               shop now
             </button>
