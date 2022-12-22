@@ -1,5 +1,6 @@
 import HomePage from '../components/HomePage';
 import Head from 'next/head';
+import uuid from 'react-uuid';
 
 interface homeProps {
   products: [{ title: string; url: string[] }];
@@ -22,10 +23,14 @@ export default function Home(props: homeProps) {
 }
 
 export async function getStaticProps() {
-  const { products } = await import('../public/data.json');
+  const data = await fetch('https://fakestoreapi.com/products');
+  const response = await data.json();
+  const productData = response.map((product: any) => {
+    return { ...product, id: uuid() };
+  });
   return {
     props: {
-      products: products,
+      products: productData,
     },
   };
 }

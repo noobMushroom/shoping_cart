@@ -42,9 +42,9 @@ export default function LoginForm() {
           <h1 className="sm:mb-[1rem] text-xl  mb-[0.5rem] font-medium sm:text-3xl uppercase select-none">
             welcome back!
           </h1>
-          <span className="mb-[1rem]">
+          <span className="mb-[0.5rem]">
             {error ? (
-              <span className="text-xl text-red-400 sm:text-2xl">{error}</span>
+              <span className="text-red-600 text-base">{error}</span>
             ) : (
               <></>
             )}

@@ -46,12 +46,12 @@ export default function RegisterPage() {
             create your account
           </h1>
           {error ? (
-            <span className="text-xl text-red-400 mb-[1rem] sm:text-2xl">
+            <span className="text-xl text-red-500 mb-[0.5rem] sm:text-sm">
               {error}
               <Link
                 href={'/login'}
                 onClick={set}
-                className="ml-[1rem] text-teal-700"
+                className="ml-[0.5rem] font-bold"
               >
                 Login
               </Link>
@@ -71,7 +71,7 @@ export default function RegisterPage() {
                 className="w-full p-[0.5rem] sm:w-[24rem] bg-gray-200 rounded-lg focus:border-cyan-900 border-2 border-black/20 outline-none "
               />
               {formik.errors.username && formik.touched.username ? (
-                <span className="text-red-500 w-full text-center">
+                <span className="text-red-500 text-sm w-full text-center">
                   {formik.errors.username}
                 </span>
               ) : (
@@ -86,7 +86,7 @@ export default function RegisterPage() {
                 className="w-full p-[0.5rem] sm:w-[24rem] bg-gray-200 rounded-lg focus:border-cyan-900 border-2 border-black/20 outline-none "
               />
               {formik.errors.email && formik.touched.email ? (
-                <span className="text-red-500 w-full text-center">
+                <span className="text-red-500 w-full text-sm text-center">
                   {formik.errors.email}
                 </span>
               ) : (
@@ -112,7 +112,7 @@ export default function RegisterPage() {
                 )}
               </div>
               {formik.errors.password && formik.touched.password ? (
-                <span className="text-red-500 w-full text-center">
+                <span className="text-red-500 w-full text-sm text-center">
                   {formik.errors.password}
                 </span>
               ) : (
@@ -141,7 +141,7 @@ export default function RegisterPage() {
               </div>
               {formik.errors.confirmPassword &&
               formik.touched.confirmPassword ? (
-                <span className="text-red-500 w-full text-center">
+                <span className="text-red-500 w-full text-sm text-center">
                   {formik.errors.confirmPassword}
                 </span>
               ) : (

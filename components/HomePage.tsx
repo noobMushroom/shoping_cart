@@ -4,89 +4,97 @@ import uuid from 'react-uuid';
 import Slider from 'react-slick';
 import Background from './StartScreen';
 import { useRouter } from 'next/router';
+import productImage1 from '../public/andrea-bertozzini-VoertyDYyjA-unsplash.jpg';
+import productImage2 from '../public/irene-kredenets-dwKiHoqqxk8-unsplash.jpg';
+import productImage3 from '../public/giorgio-trovato-K62u25Jk6vo-unsplash.jpg';
+import productImage4 from '../public/wiser-by-the-mile-SwWCo1k92M4-unsplash.jpg';
+import productImage5 from '../public/lukenn-sabellano-BJZeNGkGuaU-unsplash.jpg';
 interface PropType {
-  products: [{ title: string; url: string[] }];
-}
-
-function SamplePrevArrow(props: any) {
-  const { className, style, onClick } = props;
-  return (
-    <div onClick={onClick}>
-      <i className="fa-solid text-black absolute z-[10] top-[50%] left-[1rem] text-2xl sm:block sm:text-5xl fa-circle-chevron-left sm:hover:text-cyan-900/90 duration-300"></i>
-    </div>
-  );
-}
-
-function SampleNextArrow(props: any) {
-  const { className, style, onClick } = props;
-  return (
-    <div onClick={onClick}>
-      <i className="fa-solid absolute top-[50%] right-[1rem] text-black sm:text-5xl text-2xl sm:block fa-circle-chevron-right sm:hover:text-cyan-900/90 duration-300"></i>
-    </div>
-  );
+  products: [
+    {
+      title: string;
+      image: string;
+      rating: { rate: number; count: number };
+      price: number;
+      description: string;
+      id: string;
+    }
+  ];
 }
 
 export default function HomePage(props: PropType) {
-  const settings = {
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    speed: 500,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   const router = useRouter();
   return (
     <div className="w-[100%]">
       <div>
         <Background />
       </div>
-      {props.products.map((product) => {
-        return (
-          <div
-            key={uuid()}
-            className="mb-[0.3rem] mx-[0.5rem] sm:m-auto sm:w-[80%] relative justify-center flex flex-col border-b-2  py-[1rem] border-white "
-          >
-            <Link
-              id="start"
-              href={`/${product.title}`}
-              className="text-xl text-cyan-600 ml-[0.5rem] sm:ml-[0] font-bold underline flex items-center playfulFont capitalize mb-[0.3rem]"
-            >
-              <h1>{product.title}</h1>
-            </Link>
-            <Slider {...settings}>
-              {product.url.map((img) => {
-                return (
-                  <div
-                    key={uuid()}
-                    className="relative sm:mx-[1rem] h-[12rem] sm:h-[18rem]"
-                    onClick={() => router.push(`/${product.title}`)}
-                  >
-                    <Image
-                      src={img}
-                      alt=""
-                      fill
-                      priority={false}
-                      className="object-cover sm:object-[50%_50%]"
-                    />
-                  </div>
-                );
-              })}
-            </Slider>
+      <div className="sm:w-[90%] sm:mt-[5rem] sm:m-auto">
+        <div className="text-center hidden sm:block">
+          <div>
+            <h1 className="capitalize text-bold text-4xl mb-[3rem]">
+              Welcome to simply stylish
+            </h1>
           </div>
-        );
-      })}
+          <div className="mb-[4rem]">
+            <p className="w-[80%] m-auto text-sm text-gray-600">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Senectus et netus et malesuada fames ac turpis egestas sed. Velit
+              ut tortor pretium viverra. Duis ultricies lacus sed turpis
+              tincidunt id aliquet. Venenatis a condimentum vitae sapien
+              pellentesque habitant morbi tristique senectus.
+            </p>
+          </div>
+          <div className="grid grid-cols-12 grid-rows-6 gap-4 h-[30rem] mb-[3rem]">
+            <div className="relative col-start-1 col-end-4 row-start-1 row-end-4 shadow-xl cursor-pointer overflow-hidden">
+              <Image
+                src={productImage2}
+                priority={false}
+                alt={'sunglasses category'}
+                fill
+                className="object-cover hover:grayscale duration-300 hover:scale-110"
+              />
+            </div>
+            <div className="relative col-start-1 col-end-4 row-start-4 row-end-7 shadow-xl cursor-pointer overflow-hidden">
+              <Image
+                src={productImage3}
+                alt={'category'}
+                fill
+                priority={false}
+                className="object-cover hover:grayscale duration-300 hover:scale-110"
+              />
+            </div>
+            <div className="col-start-4 col-end-10 row-start-1 row-end-7 relative shadow-xl cursor-pointer overflow-hidden">
+              <Image
+                src={productImage1}
+                alt={'clothing section'}
+                fill
+                priority={false}
+                className="object-cover object-[50%_10%] hover:grayscale duration-300 hover:scale-110"
+              />
+            </div>
+            <div className="relative col-start-10 col-end-13 row-start-1 overflow-hidden row-end-4 shadow-xl cursor-pointer">
+              <Image
+                src={productImage4}
+                alt="category"
+                priority={false}
+                fill
+                className="object-cover hover:grayscale duration-300 object-[50%_80%] hover:scale-110"
+              />
+            </div>
+            <div className="col-start-10 col-end-13 row-start-4 row-end-7 relative shadow-xl cursor-pointer overflow-hidden">
+              <Image
+                src={productImage5}
+                alt="category"
+                fill
+                priority={false}
+                className="object-cover hover:grayscale duration-300 hover:scale-110"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
