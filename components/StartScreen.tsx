@@ -9,8 +9,8 @@ export default function Background() {
   };
   return (
     <div className="text-stone-900">
-      <div className="w-full flex-col sm:mt-[3.5rem] relative playfulFont h-screen flex justify-center duration-300 transistion ease-in ">
-        <div className="absolute top-0 left-0 right-0 bottom-0 z-10 bg-black/2" />
+      <div className="w-full flex-col relative playfulFont h-screen flex justify-center duration-300 transistion ease-in ">
+        <div className="absolute top-0 left-0 right-0 bottom-0 z-10 bg-black/1" />
         <div className="absolute top-0 left-0 right-0 bottom-0 ">
           <div className="relative w-full h-full">
             <Image
@@ -18,7 +18,7 @@ export default function Background() {
               alt="pictures"
               fill
               priority={false}
-              className="object-cover duration-300 transistion ease-in object-[43%_10%] sm:object-[50%_10%]"
+              className="object-cover duration-300 transistion ease-in object-[43%_10%] sm:object-[50%_40%]"
             />
           </div>
         </div>

@@ -54,8 +54,8 @@ export default function NavigationBar() {
             shop
             <i className="fa-solid ml-[0.3rem] fa-chevron-down"></i>
           </Link>
-          <i className="fa-sharp fa-solid fa-caret-up absolute top-[2.4rem] left-[30%] text-red-600"></i>
-          <ul className="absolute top-[3.1rem] w-[60rem] border-t-4 border-red-600 bg-zinc-100 shadow-2xl rounded left-[-20rem]">
+          <i className="fa-sharp fa-solid fa-caret-up absolute top-[2.4rem] left-[30%] hidden text-red-600"></i>
+          <ul className="absolute top-[3.1rem] w-[60rem] border-t-4 border-red-600 bg-zinc-100 hidden shadow-2xl rounded left-[-20rem]">
             this is something
           </ul>
         </li>
@@ -91,7 +91,10 @@ export default function NavigationBar() {
                 <i className="fa-solid fa-user hover:text-red-600 duration-300 hidden sm:block"></i>
               </button>
             ) : (
-              <button className="uppercase text-sm w-[7rem] mr-auto hover:text-red-600 hover:border-red-600 font-bold hidden sm:block border-2 border-zinc-900  p-[0.5rem]">
+              <button
+                onClick={() => handleClick('/login')}
+                className="uppercase text-sm w-[7rem] mr-auto hover:text-red-600 hover:border-red-600 font-bold hidden sm:block border-2 border-zinc-900  p-[0.5rem]"
+              >
                 login
               </button>
             )}
