@@ -26,7 +26,7 @@ export default function NavigationBar() {
           Simply Stylish
         </Link>
       </div>
-      <ul className="sm:m-auto sm:grow  flex items-center justify-around">
+      <ul className="sm:m-auto sm:grow h-[100%] flex items-center justify-around">
         {/* button to toggle menu */}
         <li>
           <button onClick={() => setIsOpen(!isOpen)}>
@@ -46,13 +46,18 @@ export default function NavigationBar() {
             Home
           </Link>
         </li>
-        <li>
+        <li className="relative">
           <Link
             href="/"
-            className="hover:text-rose-600 text-sm uppercase duration-100 hidden sm:block font-semibold"
+            className="hover:text-rose-600 flex itmes-center text-sm uppercase duration-100 hidden sm:block font-semibold"
           >
             shop
+            <i className="fa-solid ml-[0.3rem] fa-chevron-down"></i>
           </Link>
+          <i className="fa-sharp fa-solid fa-caret-up absolute top-[2.4rem] left-[30%] text-red-600"></i>
+          <ul className="absolute top-[3.1rem] w-[60rem] border-t-4 border-red-600 bg-zinc-100 shadow-2xl rounded left-[-20rem]">
+            this is something
+          </ul>
         </li>
         <li>
           <Link
