@@ -7,6 +7,7 @@ const nextConfig = {
       'images.unsplash.com',
       'i.dummyjson.com',
       'media.istockphoto.com',
+      'fakestoreapi.com',
     ],
   },
 };

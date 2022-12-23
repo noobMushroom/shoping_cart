@@ -23,6 +23,7 @@ interface PropType {
 }
 
 export default function HomePage(props: PropType) {
+  console.log(props);
   const router = useRouter();
   return (
     <div className="w-[100%]">
@@ -46,7 +47,7 @@ export default function HomePage(props: PropType) {
               pellentesque habitant morbi tristique senectus.
             </p>
           </div>
-          <div className="grid grid-cols-12 grid-rows-6 gap-4 h-[30rem] mb-[3rem]">
+          <div className="grid grid-cols-12 grid-rows-6 gap-4 h-[30rem] mb-[6rem]">
             <div className="relative col-start-1 col-end-4 row-start-1 row-end-4 shadow-xl cursor-pointer overflow-hidden">
               <Image
                 src={productImage2}
@@ -93,6 +94,34 @@ export default function HomePage(props: PropType) {
               />
             </div>
           </div>
+        </div>
+      </div>
+      <div className="my-[1rem] sm:w-[90%] m-auto">
+        <div className="text-center">
+          <h1 className="sm:text-4xl sm:mb-[3rem]">Latest Arrivals</h1>
+          <p className="sm:w-[60%] sm:m-auto text-sm text-gray-700">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+        <div className="grid grid-cols-2  sm:p-[1rem] gap-4 sm:grid-cols-4">
+          {props.products.map((product) => {
+            return (
+              <div key={product.id}>
+                <div className="relative sm:h-[20rem] bg-white sm:w-full sm:p-[1rem]">
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    priority={false}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
