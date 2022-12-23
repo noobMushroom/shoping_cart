@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { useShoppingList } from '../context/ShoppingList';
+import { homeProps } from '../pages';
 import Link from 'next/link';
 import uuid from 'react-uuid';
 import Slider from 'react-slick';
@@ -23,8 +25,9 @@ interface PropType {
   ];
 }
 
-export default function HomePage(props: PropType) {
+export default function HomePage(props: homeProps) {
   const router = useRouter();
+  const { addProduct, reduceProduct, shoppingList } = useShoppingList();
   return (
     <div className="w-[100%]">
       <div>
@@ -33,7 +36,7 @@ export default function HomePage(props: PropType) {
       <div className="sm:w-[90%] sm:mt-[5rem] sm:m-auto">
         <div className="text-center hidden sm:block">
           <div>
-            <h1 className="capitalize text-bold text-4xl mb-[3rem]">
+            <h1 className="capitalize text-bold text-4xl mb-[2rem]">
               Welcome to simply stylish
             </h1>
           </div>
@@ -52,7 +55,7 @@ export default function HomePage(props: PropType) {
               <Image
                 src={productImage2}
                 priority={false}
-                alt={'sunglasses category'}
+                alt={'sneakers'}
                 fill
                 className="object-cover hover:grayscale duration-300 hover:scale-110"
               />
@@ -60,7 +63,7 @@ export default function HomePage(props: PropType) {
             <div className="relative col-start-1 col-end-4 row-start-4 row-end-7 shadow-xl cursor-pointer overflow-hidden">
               <Image
                 src={productImage3}
-                alt={'category'}
+                alt={'sungalsses'}
                 fill
                 priority={false}
                 className="object-cover hover:grayscale duration-300 hover:scale-110"
@@ -74,11 +77,6 @@ export default function HomePage(props: PropType) {
                 priority={false}
                 className="object-cover object-[50%_10%] hover:grayscale duration-300 hover:scale-110"
               />
-              <div>
-                <Link href={'/'} className="text-black z-[999] absolute">
-                  Clothing
-                </Link>
-              </div>
             </div>
             <div className="relative col-start-10 col-end-13 row-start-1 overflow-hidden row-end-4 shadow-xl cursor-pointer">
               <Image
@@ -92,7 +90,7 @@ export default function HomePage(props: PropType) {
             <div className="col-start-10 col-end-13 row-start-4 row-end-7 relative shadow-xl cursor-pointer overflow-hidden">
               <Image
                 src={productImage5}
-                alt="category"
+                alt="smartphones"
                 fill
                 priority={false}
                 className="object-cover hover:grayscale duration-300 hover:scale-110"
@@ -103,7 +101,7 @@ export default function HomePage(props: PropType) {
       </div>
       <div className="my-[1rem] sm:w-[90%] m-auto">
         <div className="text-center">
-          <h1 className=" text-2xl sm:text-4xl sm:mb-[3rem]">
+          <h1 className=" text-2xl sm:text-4xl sm:mb-[2rem]">
             Latest Arrivals
           </h1>
           <p className="sm:w-[60%] sm:m-auto text-sm text-gray-700 hidden sm:block">
@@ -118,20 +116,37 @@ export default function HomePage(props: PropType) {
             return (
               <div key={product.id}>
                 <div className="relative h-[15rem] sm:h-[20rem] mb-[0.4rem] cursor-pointer bg-white sm:w-full sm:p-[1rem]">
-                  <Image
-                    src={product.image}
-                    alt={product.title}
-                    fill
-                    priority={false}
-                    className="object-contain"
-                  />
+                  {product.images.map((el) => {
+                    return (
+                      <Image
+                        key={product.id}
+                        src={el}
+                        alt={product.title}
+                        fill
+                        priority={false}
+                        className="object-contain"
+                      />
+                    );
+                  })}
                   <div className="z-[999] font-black text-xl bg-black/20 sm:opacity-0 sm:bg-neutral-900/80 flex duration-300 ease-in-out hover:opacity-100 items-end justify-center top-0 left-0 right-0 bottom-0 absolute">
                     <div className="flex items-center text-black sm:text-white mb-[1.5rem] sm:mb-[3rem] shadow-2xl w-[6rem] sm:h-[2rem] border-2  border-black sm:border-white justify-evenly">
-                      <button className="border-r-2 border-black bg-red-700 text-white sm:bg-transparent sm:border-white sm:hover:text-red-600 text-center h-[100%] w-full">
+                      <button
+                        onClick={() => addProduct(product)}
+                        className="border-r-2 border-black bg-red-700 text-white sm:bg-transparent sm:border-white sm:hover:text-red-600 text-center h-[100%] w-full"
+                      >
                         <i className="fa-solid fa-plus"></i>
                       </button>
-                      <h1 className="w-full text-center h-[100%]">0</h1>
-                      <button className="border-l-2 bg-blue-700 text-white sm:bg-transparent border-black sm:border-white sm:hover:text-red-600 w-full h-[100%] text-center">
+                      <h1 className="w-full text-center h-[100%]">
+                        {shoppingList[product.title] ? (
+                          <h1>{shoppingList[product.title].count}</h1>
+                        ) : (
+                          <h1>0</h1>
+                        )}
+                      </h1>
+                      <button
+                        onClick={() => reduceProduct(product)}
+                        className="border-l-2 bg-blue-700 text-white sm:bg-transparent border-black sm:border-white sm:hover:text-red-600 w-full h-[100%] text-center"
+                      >
                         <i className="fa-solid fa-minus"></i>
                       </button>
                     </div>

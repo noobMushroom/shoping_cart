@@ -21,7 +21,7 @@ export interface Product {
 
 // interface for state
 interface StateProps {
-  [id: number]: {
+  [title: string]: {
     count: number;
     brand: string;
     description: string;
@@ -91,10 +91,10 @@ export default function ShoppingListProvider(
   }, [currentUser]);
 
   async function addProduct(product: Product) {
-    if (!(product.id in shoppingList)) {
+    if (!(product.title in shoppingList)) {
       setShoppingList((prevState) => ({
         ...prevState,
-        [product.id]: { ...product, count: 1 },
+        [product.title]: { ...product, count: 1 },
       }));
       try {
         if (!currentUser) return;
@@ -103,7 +103,7 @@ export default function ShoppingListProvider(
           userRef,
           {
             cart: {
-              [product.id]: { ...product, count: 1 },
+              [product.title]: { ...product, count: 1 },
             },
           },
           { merge: true }
@@ -114,11 +114,11 @@ export default function ShoppingListProvider(
     } else {
       const updatedProduct = {
         ...product,
-        count: shoppingList[product.id].count + 1,
+        count: shoppingList[product.title].count + 1,
       }; // updating the product
       setShoppingList((prevState) => ({
         ...prevState,
-        [product.id]: { ...updatedProduct },
+        [product.title]: { ...updatedProduct },
       }));
       try {
         if (!currentUser) return;
@@ -127,7 +127,7 @@ export default function ShoppingListProvider(
           userRef,
           {
             cart: {
-              [product.id]: updatedProduct,
+              [product.title]: updatedProduct,
             },
           },
           { merge: true }
@@ -140,14 +140,18 @@ export default function ShoppingListProvider(
 
   //function to reduce the number of items in the list
   async function reduceProduct(product: Product) {
-    if (product.id in shoppingList && shoppingList[product.id].count > 0) {
+    if (
+      product.title in shoppingList &&
+      shoppingList[product.title].count > 0
+    ) {
       const updatedProduct = {
         ...product,
-        count: shoppingList[product.id].count - 1,
+        count: shoppingList[product.title].count - 1,
       }; // updating the product
+
       setShoppingList((prevState) => ({
         ...prevState,
-        [product.id]: { ...updatedProduct },
+        [product.title]: { ...updatedProduct },
       }));
       try {
         if (!currentUser) return;
@@ -156,7 +160,7 @@ export default function ShoppingListProvider(
           userRef,
           {
             cart: {
-              [product.id]: { ...updatedProduct },
+              [product.title]: { ...updatedProduct },
             },
           },
           { merge: true }
@@ -169,7 +173,7 @@ export default function ShoppingListProvider(
 
   async function handleDelete(product: Product) {
     const tempObj = { ...shoppingList };
-    delete tempObj[product.id];
+    delete tempObj[product.title];
     setShoppingList(tempObj);
     if (currentUser) {
       const userRef = doc(db, 'users', currentUser.uid);
@@ -177,7 +181,7 @@ export default function ShoppingListProvider(
         userRef,
         {
           cart: {
-            [product.id]: deleteField(),
+            [product.title]: deleteField(),
           },
         },
         { merge: true }
