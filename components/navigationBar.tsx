@@ -16,7 +16,7 @@ export default function NavigationBar() {
   }
 
   return (
-    <nav className="w-full sm:h-[5rem] fixed top-0 left-0 shadow-xl top-0 left-0 bg-zinc-100 text-black flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[999] pt-[1rem]">
+    <nav className="w-full sm:h-[5rem] fixed top-0 left-0 shadow-xl top-0 left-0 bg-zinc-100/90 text-black flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[1000] pt-[1rem]">
       <div>
         <Link
           href={'/'}

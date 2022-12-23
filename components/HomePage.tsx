@@ -18,12 +18,12 @@ interface PropType {
       price: number;
       description: string;
       id: string;
+      category: string;
     }
   ];
 }
 
 export default function HomePage(props: PropType) {
-  console.log(props);
   const router = useRouter();
   return (
     <div className="w-[100%]">
@@ -74,6 +74,11 @@ export default function HomePage(props: PropType) {
                 priority={false}
                 className="object-cover object-[50%_10%] hover:grayscale duration-300 hover:scale-110"
               />
+              <div>
+                <Link href={'/'} className="text-black z-[999] absolute">
+                  Clothing
+                </Link>
+              </div>
             </div>
             <div className="relative col-start-10 col-end-13 row-start-1 overflow-hidden row-end-4 shadow-xl cursor-pointer">
               <Image
@@ -98,19 +103,21 @@ export default function HomePage(props: PropType) {
       </div>
       <div className="my-[1rem] sm:w-[90%] m-auto">
         <div className="text-center">
-          <h1 className="sm:text-4xl sm:mb-[3rem]">Latest Arrivals</h1>
-          <p className="sm:w-[60%] sm:m-auto text-sm text-gray-700">
+          <h1 className=" text-2xl sm:text-4xl sm:mb-[3rem]">
+            Latest Arrivals
+          </h1>
+          <p className="sm:w-[60%] sm:m-auto text-sm text-gray-700 hidden sm:block">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat.
           </p>
         </div>
-        <div className="grid grid-cols-2  sm:p-[1rem] gap-4 sm:grid-cols-4">
+        <div className="grid grid-cols-2 mt-[2rem] p-[1rem] gap-x-4  gap-y-6 sm:gap-x-6 sm:gap-y-8 sm:mt-[4rem] sm:grid-cols-4">
           {props.products.map((product) => {
             return (
               <div key={product.id}>
-                <div className="relative sm:h-[20rem] bg-white sm:w-full sm:p-[1rem]">
+                <div className="relative h-[15rem] sm:h-[20rem] mb-[0.4rem] cursor-pointer bg-white sm:w-full sm:p-[1rem]">
                   <Image
                     src={product.image}
                     alt={product.title}
@@ -118,6 +125,31 @@ export default function HomePage(props: PropType) {
                     priority={false}
                     className="object-contain"
                   />
+                  <div className="z-[999] font-black text-xl bg-black/20 sm:opacity-0 sm:bg-neutral-900/80 flex duration-300 ease-in-out hover:opacity-100 items-end justify-center top-0 left-0 right-0 bottom-0 absolute">
+                    <div className="flex items-center text-black sm:text-white mb-[1.5rem] sm:mb-[3rem] shadow-2xl w-[6rem] sm:h-[2rem] border-2  border-black sm:border-white justify-evenly">
+                      <button className="border-r-2 border-black bg-red-700 text-white sm:bg-transparent sm:border-white sm:hover:text-red-600 text-center h-[100%] w-full">
+                        <i className="fa-solid fa-plus"></i>
+                      </button>
+                      <h1 className="w-full text-center h-[100%]">0</h1>
+                      <button className="border-l-2 bg-blue-700 text-white sm:bg-transparent border-black sm:border-white sm:hover:text-red-600 w-full h-[100%] text-center">
+                        <i className="fa-solid fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-sm text-gray-700">{product.category}</h3>
+                </div>
+                <div>
+                  <h1 className="text-sm font-black">{product.title}</h1>
+                </div>
+                <div>
+                  <h1 className="font-bold text-red-600">
+                    {new Intl.NumberFormat('en-us', {
+                      style: 'currency',
+                      currency: 'usd',
+                    }).format(product.price)}
+                  </h1>
                 </div>
               </div>
             );
