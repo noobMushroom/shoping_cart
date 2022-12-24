@@ -18,7 +18,7 @@ export default function Background() {
               alt="pictures"
               fill
               priority={false}
-              className="object-cover duration-300 transistion ease-in object-[43%_10%] sm:object-[50%_40%]"
+              className="object-cover select-none duration-300 transistion ease-in object-[43%_10%] sm:object-[50%_40%]"
             />
           </div>
         </div>
@@ -27,7 +27,7 @@ export default function Background() {
             <h3 className="sm:text-2xl text-xl  text-center sm:text-start uppercase select-none font-semibold sm:font-bold">
               new arrivals
             </h3>
-            <h1 className="sm:text-6xl text-[#1d1b28] sm:font-black font-black text-2xl text-center mt-[1rem] sm:text-start uppercase">
+            <h1 className="sm:text-6xl select-none text-[#1d1b28] sm:font-black font-black text-2xl text-center mt-[1rem] sm:text-start uppercase">
               Amazing winter collection
             </h1>
             <p className="text-xs select-none  mt-[1rem] hidden sm:block sm:text-sm italic sm:w-[35rem]">

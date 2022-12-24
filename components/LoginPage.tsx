@@ -27,7 +27,7 @@ export default function LoginForm() {
   }
 
   return (
-    <section className="w-[100vw] sm:w-[60rem]  min-h-screen flex items-center justify-center p-[0.5rem]">
+    <section className="w-[100vw] sm:w-[60rem] m-auto min-h-screen flex items-center justify-center p-[0.5rem]">
       <div className="sm:h-[30rem] flex sm:shadow-2xl bg-none sm:bg-white rounded">
         <div className="relative  w-[20rem] hidden sm:block">
           <Image

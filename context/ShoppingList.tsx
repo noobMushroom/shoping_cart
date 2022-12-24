@@ -20,7 +20,7 @@ export interface Product {
 }
 
 // interface for state
-interface StateProps {
+export interface StateProps {
   [title: string]: {
     count: number;
     brand: string;

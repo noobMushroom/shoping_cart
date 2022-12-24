@@ -30,7 +30,7 @@ export default function HomePage(props: homeProps) {
       <div>
         <Background />
       </div>
-      <div className="sm:w-[90%] sm:mt-[5rem] sm:m-auto">
+      <div className="sm:w-[90%] select-none sm:mt-[5rem] sm:m-auto">
         <div className="text-center hidden sm:block">
           <div>
             <h1 className="capitalize text-bold text-4xl mb-[2rem]">
@@ -111,7 +111,7 @@ export default function HomePage(props: homeProps) {
           </div>
         </div>
       </div>
-      <div className="my-[1rem] sm:w-[90%] m-auto">
+      <div className="my-[1rem] sm:w-[90%] select-none m-auto">
         <div className="text-center">
           <h1 className=" text-2xl sm:text-4xl sm:mb-[2rem]">
             Latest Arrivals

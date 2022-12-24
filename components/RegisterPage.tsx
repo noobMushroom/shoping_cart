@@ -30,7 +30,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <section className="w-[100vw] sm:w-[50rem] min-h-screen flex flex-col items-center justify-center p-[0.5rem] sm:my-[1rem]">
+    <section className="w-[100vw] sm:w-[50rem] min-h-screen m-auto flex flex-col items-center justify-center p-[0.5rem] sm:my-[1rem]">
       <div className="flex shadow-2xl sm:h-[35rem] sm:w-full sm:bg-white sm:rounded sm:m-auto">
         <div className="relative hidden sm:block h-[35rem] w-[30rem]">
           <Image

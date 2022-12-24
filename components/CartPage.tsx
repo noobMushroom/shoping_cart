@@ -24,7 +24,7 @@ export default function CartPage() {
 
   if (loading) return <div>Loading....</div>;
   return (
-    <div className="w-[100vw] p-[1rem] mt-[3rem] sm:mt-[5rem] min-h-screen mt-[1rem] sm:w-[60rem] sm:m-auto relative">
+    <div className="w-[100vw] text-black p-[1rem] mt-[3rem] sm:mt-[5rem] min-h-screen mt-[1rem] sm:w-[60rem] sm:m-auto relative">
       {currentUser ? (
         <></>
       ) : (
@@ -58,9 +58,9 @@ export default function CartPage() {
           return (
             <div
               key={uuid()}
-              className="mt-[1rem] mb-[1rem] bg-slate-800 p-[1rem] rounded-md sm:p-[2rem] shadow-2xl flex sm:flex-row sm: items-start sm:justify-start flex-col"
+              className=" flex flex-col sm:flex-row shadow-2xl w-[95vw] sm:my-[2rem] sm:p-[2rem] sm:w-[70vw] rounded-lg p-[0.5rem] my-[1rem] m-auto bg-gray-100 items-center"
             >
-              <div className="relative h-[12rem] sm:h-[15rem] sm:mr-[1rem] rounded-lg w-full">
+              <div className="relative bg-white h-[12rem] sm:h-[15rem] sm:mr-[1rem] w-full">
                 <Image
                   src={shoppingList[product].thumbnail}
                   fill
@@ -69,76 +69,67 @@ export default function CartPage() {
                   className="object-contain"
                 />
               </div>
-              <div className="flex flex-col w-full">
+              <div className="flex flex-col w-full mt-4 sm:mt-0 sm:pl-[1rem]">
                 <div>
-                  <h1 className="text-lg sm:text-2xl">
+                  <strong className="text-xs text-gray-700">
+                    {shoppingList[product].brand}
+                  </strong>
+                  <h1 className="text-xl sm:text-2xl font-semibold mt-[0.2rem]">
                     {shoppingList[product].title}
                   </h1>
-                  <h1 className="text-lg sm:text-2xl">
-                    {shoppingList[product].brand}
-                  </h1>
                 </div>
                 <div>
                   <div className="flex items-center">
-                    <h1 className="mr-[0.5rem] text-lg text-blue-600">
-                      Price:
+                    <h1 className="font-bold text-2xl sm:text-4xl my-2 text-red-600">
+                      {new Intl.NumberFormat('en-us', {
+                        style: 'currency',
+                        currency: 'usd',
+                      }).format(shoppingList[product].price)}
                     </h1>
-                    <h1>{shoppingList[product].price}$</h1>
                   </div>
                   <div className="flex items-center">
-                    <h1 className="mr-[0.5rem] text-lg text-blue-600">
-                      Discount:
-                    </h1>
-                    <h1> {shoppingList[product].discountPercentage}%</h1>
-                  </div>
-                  <div className="flex items-center">
-                    <h1 className="mr-[0.5rem] text-lg text-blue-600">
-                      Total :
-                    </h1>
-                    <h2>
-                      {shoppingList[product].count *
-                        shoppingList[product].price}
-                      $
+                    <h2 className="mr-2 text-gray-800">Total:</h2>
+                    <h2 className="font-bold">
+                      {new Intl.NumberFormat('en-us', {
+                        style: 'currency',
+                        currency: 'usd',
+                      }).format(
+                        shoppingList[product].price *
+                          shoppingList[product].count
+                      )}
                     </h2>
                   </div>
                 </div>
-                <div className="flex flex-col self-center  items-center justify-center">
-                  <h1 className="mr-[0.5rem] text-lg text-orange-600">
-                    Total Items in the Cart
-                  </h1>
-                  <div className="flex items-center justify-center">
-                    <button onClick={() => addProduct(shoppingList[product])}>
-                      <i className="fa-solid text-4xl mr-[0.5rem] sm:hover:text-orange-500 duration-300 sm:hover:opacity-50 sm:text-5xl text-orange-600 fa-circle-plus"></i>
+                <div className="flex my-[0.5rem] items-center sm:my-[1rem] gap-4 sm:gap-10 ">
+                  <div className="flex items-center text-black sm:text-2xl shadow-lg w-[8rem] h-[2rem] sm:h-[2.5rem] border-2 border-black justify-evenly">
+                    <button
+                      onClick={() => addProduct(shoppingList[product])}
+                      className="border-r-2 border-black bg-red-700 sm:bg-transparent sm:hover:text-red-600 text-center h-[100%] w-full"
+                    >
+                      <i className="fa-solid fa-plus"></i>
                     </button>
-                    <h2 className="text-xl mr-[0.5rem] sm:text-2xl">
-                      {shoppingList[product].count}
-                    </h2>
+                    <h1 className="w-full text-center h-[100%] flex items-center justify-center">
+                      {shoppingList[product].title ? (
+                        <h1>{shoppingList[product].count}</h1>
+                      ) : (
+                        <h1>0</h1>
+                      )}
+                    </h1>
                     <button
                       onClick={() => reduceProduct(shoppingList[product])}
+                      className="border-l-2 bg-blue-700 sm:bg-transparent border-black sm:hover:text-red-600 w-full h-[100%] text-center"
                     >
-                      <i className="fa-solid text-4xl text-blue-600 sm:hover:text-sky-500 duration-300 sm:hover:opacity-50 sm:text-5xl fa-circle-minus"></i>
+                      <i className="fa-solid fa-minus"></i>
                     </button>
                   </div>
-                </div>
-                <div className="self-center flex justify-between sm:justify-center w-full">
-                  <button
-                    onClick={() =>
-                      handleClick(
-                        shoppingList[product].category,
-                        shoppingList[product].id
-                      )
-                    }
-                    className="p-[0.2rem] w-[8rem] rounded-md mr-[0.5rem] sm:mr-[2rem] sm:mt-[1.5rem] sm:p-[0.5rem] sm:text-xl sm:hover:opacity-50 duration-300 text-bold bg-cyan-600 mt-[0.7rem] text-center "
-                  >
-                    <i className="fa-solid fa-circle-info mr-[0.5rem]"></i>
-                    Details
-                  </button>
-                  <button
-                    onClick={() => handleDelete(shoppingList[product])}
-                    className="p-[0.2rem] w-[8rem] rounded-md sm:mt-[1.5rem] sm:p-[0.5rem] sm:text-xl sm:hover:opacity-50 duration-300 text-bold bg-red-600 mt-[0.7rem] text-center"
-                  >
-                    Delete<i className=" ml-[0.5rem] fa-solid fa-trash-can"></i>
-                  </button>
+                  <div>
+                    <button
+                      onClick={() => handleDelete(shoppingList[product])}
+                      className="h-[2rem] sm:h-[2.5rem] shadow-lg px-[0.5rem] border-2 border-black text-sm sm:hover:bg-gray-800 sm:hover:text-white sm:hover:border-gray-800 duration-300"
+                    >
+                      Remove Product
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
