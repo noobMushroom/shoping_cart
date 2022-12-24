@@ -1,9 +1,6 @@
 import Image from 'next/image';
 import { useShoppingList } from '../context/ShoppingList';
 import { homeProps } from '../pages';
-import Link from 'next/link';
-import uuid from 'react-uuid';
-import Slider from 'react-slick';
 import Background from './StartScreen';
 import { useRouter } from 'next/router';
 import productImage1 from '../public/andrea-bertozzini-VoertyDYyjA-unsplash.jpg';
@@ -19,7 +16,7 @@ interface PropType {
       rating: { rate: number; count: number };
       price: number;
       description: string;
-      id: string;
+      id: number;
       category: string;
     }
   ];
@@ -51,7 +48,10 @@ export default function HomePage(props: homeProps) {
             </p>
           </div>
           <div className="grid grid-cols-12 grid-rows-6 gap-4 h-[30rem] mb-[6rem]">
-            <div className="relative col-start-1 col-end-4 row-start-1 row-end-4 shadow-xl cursor-pointer overflow-hidden">
+            <div
+              onClick={() => router.push('/womens-shoes')}
+              className="relative col-start-1 col-end-4 row-start-1 row-end-4 shadow-xl cursor-pointer overflow-hidden"
+            >
               <Image
                 src={productImage2}
                 priority={false}
@@ -60,7 +60,10 @@ export default function HomePage(props: homeProps) {
                 className="object-cover hover:grayscale duration-300 hover:scale-110"
               />
             </div>
-            <div className="relative col-start-1 col-end-4 row-start-4 row-end-7 shadow-xl cursor-pointer overflow-hidden">
+            <div
+              onClick={() => router.push('/sunglasses')}
+              className="relative col-start-1 col-end-4 row-start-4 row-end-7 shadow-xl cursor-pointer overflow-hidden"
+            >
               <Image
                 src={productImage3}
                 alt={'sungalsses'}
@@ -69,7 +72,10 @@ export default function HomePage(props: homeProps) {
                 className="object-cover hover:grayscale duration-300 hover:scale-110"
               />
             </div>
-            <div className="col-start-4 col-end-10 row-start-1 row-end-7 relative shadow-xl cursor-pointer overflow-hidden">
+            <div
+              onClick={() => router.push('/womens-dresses')}
+              className="col-start-4 col-end-10 row-start-1 row-end-7 relative shadow-xl cursor-pointer overflow-hidden"
+            >
               <Image
                 src={productImage1}
                 alt={'clothing section'}
@@ -78,16 +84,22 @@ export default function HomePage(props: homeProps) {
                 className="object-cover object-[50%_10%] hover:grayscale duration-300 hover:scale-110"
               />
             </div>
-            <div className="relative col-start-10 col-end-13 row-start-1 overflow-hidden row-end-4 shadow-xl cursor-pointer">
+            <div
+              onClick={() => router.push('/womens-bags')}
+              className="relative col-start-10 col-end-13 row-start-1 overflow-hidden row-end-4 shadow-xl cursor-pointer"
+            >
               <Image
                 src={productImage4}
-                alt="category"
+                alt="hand bags"
                 priority={false}
                 fill
                 className="object-cover hover:grayscale duration-300 object-[50%_80%] hover:scale-110"
               />
             </div>
-            <div className="col-start-10 col-end-13 row-start-4 row-end-7 relative shadow-xl cursor-pointer overflow-hidden">
+            <div
+              onClick={() => router.push('/smartphones')}
+              className="col-start-10 col-end-13 row-start-4 row-end-7 relative shadow-xl cursor-pointer overflow-hidden"
+            >
               <Image
                 src={productImage5}
                 alt="smartphones"
@@ -115,7 +127,10 @@ export default function HomePage(props: homeProps) {
           {props.products.map((product) => {
             return (
               <div key={product.id}>
-                <div className="relative h-[15rem] sm:h-[20rem] mb-[0.4rem] cursor-pointer bg-white sm:w-full sm:p-[1rem]">
+                <div
+                  onClick={() => router.push(`/latest/${product.id}`)}
+                  className="relative h-[15rem] sm:h-[20rem] mb-[0.4rem] cursor-pointer bg-white sm:w-full sm:p-[1rem]"
+                >
                   {product.images.map((el) => {
                     return (
                       <Image

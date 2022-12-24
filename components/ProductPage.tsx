@@ -9,6 +9,7 @@ export default function ProductPage(props: DataProps) {
   const router = useRouter();
   const { shoppingList, addProduct } = useShoppingList(); // accessing functions to update product values;
 
+  // this fucntion push the route and take two parameters category of the product and name of the product
   function handleClick(category: string, id: number) {
     router.push(`/${category}/${id}`);
   }
@@ -49,8 +50,8 @@ export default function ProductPage(props: DataProps) {
               </div>
               <div className="flex text-xl">
                 <p className="mr-[0.5rem]">Item in cart: </p>
-                {shoppingList[product.id] ? (
-                  <h1>{shoppingList[product.id].count}</h1>
+                {shoppingList[product.title] ? (
+                  <h1>{shoppingList[product.title].count}</h1>
                 ) : (
                   <h1>0</h1>
                 )}

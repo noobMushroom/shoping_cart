@@ -1,124 +1,85 @@
 import Image from 'next/image';
 import uuid from 'react-uuid';
-import Slider from 'react-slick';
 import { useShoppingList } from '../context/ShoppingList';
 import Stars from './Ratings';
+import { ProductProps } from '../pages/[cat]/[id]';
 
-// fucntions for the arrow of slider
-function SamplePrevArrow(props: any) {
-  const { className, style, onClick } = props;
-  return (
-    <div onClick={onClick}>
-      <i className="fa-solid  text-black absolute z-[10] top-[50%] left-[1rem] hidden sm:block sm:text-5xl fa-circle-chevron-left hover:text-cyan-900/90 duration-300"></i>
-    </div>
-  );
-}
-
-function SampleNextArrow(props: any) {
-  const { className, style, onClick } = props;
-  return (
-    <div onClick={onClick}>
-      <i className="fa-solid absolute top-[50%] right-[1rem] text-black sm:text-5xl hidden sm:block fa-circle-chevron-right hover:text-cyan-900/90 duration-300"></i>
-    </div>
-  );
-}
-
-interface Props {
-  data: {
-    count: number;
-    brand: string;
-    description: string;
-    discountPercentage: string;
-    id: number;
-    images: string[];
-    title: string;
-    thumbnail: string;
-    stock: string;
-    rating: number;
-    price: number;
-    category: string;
-  };
-}
-
-export default function ProductDetails(data: Props) {
-  const settings = {
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    speed: 500,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+export default function ProductDetails(data: ProductProps) {
   const { addProduct, reduceProduct, shoppingList } = useShoppingList();
   return (
-    <div className="sm:w-[60rem] w-[100vw] p-[0.5rem] text-white mt-0 min-h-screen mt-[5.5rem] sm:mt-[6rem]">
-      <div className="text-center">
-        <strong className="capitalize text-xl sm:text-4xl sm:my-[1rem] playfulFont">
-          {data.data.title}
-        </strong>
-        <h1 className="playfulFont sm:text-3xl sm:mb-[1rem] my-[0.5rem]">
-          {data.data.brand}
-        </h1>
-      </div>
-      <Slider {...settings}>
-        {data.data.images.map((image) => {
-          return (
-            <div
-              key={uuid()}
-              className="relative sm:mx-[1rem] h-[12rem] sm:h-[18rem]"
-            >
-              <Image
-                src={image}
-                alt={data.data.title}
-                fill
-                className="object-cover object-[50%_0%]"
-              />
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="bg-neutral-100 sm:flex  sm:gap-8 p-[1rem] sm:p-[1.5rem] sm:h-[30rem] sm:w-[60rem] sm:shadow-2xl">
+        <div className="relative sm:w-[40rem] bg-white sm:h-[20rem]">
+          <Image
+            src={data.thumbnail}
+            alt={data.title}
+            fill
+            priority={false}
+            className="object-contain"
+          />
+        </div>
+        <div>
+          <div>
+            <h1 className="sm:text-3xl sm:font-bold">{data.title}</h1>
+          </div>
+          <div>
+            <h4 className="text-base text-neutral-700">{data.brand}</h4>
+          </div>
+          <div>
+            <h1 className="font-bold sm:text-4xl sm:my-[1rem] text-red-600">
+              {new Intl.NumberFormat('en-us', {
+                style: 'currency',
+                currency: 'usd',
+              }).format(data.price)}
+            </h1>
+          </div>
+          <div>
+            <p className="text-sm text-gray-700 sm:my-[1rem]">
+              {data.description}
+            </p>
+          </div>
+
+          <div className="flex items-center sm:mt-10 sm:mb-12 gap-14">
+            <div className="flex items-center text-black sm:text-2xl shadow-lg sm:w-[10rem] sm:h-[3rem]  border-2 border-black justify-evenly">
+              <button
+                onClick={() => addProduct(data)}
+                className="border-r-2 border-black bg-red-700 sm:bg-transparent sm:hover:text-red-600 text-center h-[100%] w-full"
+              >
+                <i className="fa-solid fa-plus"></i>
+              </button>
+              <h1 className="w-full text-center h-[100%] flex items-center justify-center">
+                {shoppingList[data.title] ? (
+                  <h1>{shoppingList[data.title].count}</h1>
+                ) : (
+                  <h1>0</h1>
+                )}
+              </h1>
+              <button
+                onClick={() => reduceProduct(data)}
+                className="border-l-2 bg-blue-700 sm:bg-transparent border-black sm:hover:text-red-600 w-full h-[100%] text-center"
+              >
+                <i className="fa-solid fa-minus"></i>
+              </button>
             </div>
-          );
-        })}
-      </Slider>
-      <div>
-        <h1 className="playfulFont text-xl sm:text-2xl sm:font-semibold my-[0.5rem] px-[1rem]">
-          {data.data.category}
-        </h1>
-      </div>
-      <div>
-        <p className="playfulFont my-[0.2rem] px-[1rem] sm:text-xl">
-          {data.data.description}
-        </p>
-      </div>
-      <div className=" my-[0.2rem] px-[1rem] sm:text-xl">
-        <h3>Price: {data.data.price}$</h3>
-        <h3>Discount: {data.data.discountPercentage}%</h3>
-        <h3>Stock: {data.data.stock}</h3>
-      </div>
-      <div className="my-[0.2rem] px-[1rem]">
-        <Stars num={data.data.rating} />
-      </div>
-      <div className="flex items-center ml-[1rem] sm:my-[1rem] ">
-        <button onClick={() => addProduct(data.data)}>
-          <i className="fa-solid text-4xl mr-[0.5rem] sm:hover:text-orange-500 duration-300 sm:hover:opacity-50 sm:text-5xl text-orange-600 fa-circle-plus"></i>
-        </button>
-        {shoppingList[data.data.id] ? (
-          <h1 className="text-4xl mr-[0.5rem] sm:text-5xl">
-            {shoppingList[data.data.id].count}
-          </h1>
-        ) : (
-          <h1 className="text-4xl mr-[0.5rem] sm:text-5xl">0</h1>
-        )}
-        <button onClick={() => reduceProduct(data.data)}>
-          <i className="fa-solid text-4xl text-blue-600 sm:hover:text-sky-500 duration-300 sm:hover:opacity-50 sm:text-5xl fa-circle-minus"></i>
-        </button>
+            <div>
+              <button className="sm:h-[3rem] sm:px-[0.5rem] border-2 border-black text-sm sm:hover:bg-gray-800 sm:hover:text-white sm:hover:border-gray-800 duration-300">
+                Remove Product
+              </button>
+            </div>
+          </div>
+          <div className="flex items-center">
+            <h3 className="sm:mr-2 font-bold capitalize">category:</h3>
+            <h6 className="text-neutral-700 capitalize">{data.category}</h6>
+          </div>
+          <div className="flex items-center">
+            <h3 className="sm:mr-2 font-bold capitalize">Stock:</h3>
+            <h6 className="text-neutral-700 capitalize">{data.stock}</h6>
+          </div>
+          <div className="flex items-center">
+            <h3 className="sm:mr-2 font-bold capitalize">Rating:</h3>
+            <h6 className="text-neutral-700 capitalize">{data.rating}</h6>
+          </div>
+        </div>
       </div>
     </div>
   );

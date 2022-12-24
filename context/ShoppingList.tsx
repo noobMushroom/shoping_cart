@@ -91,80 +91,50 @@ export default function ShoppingListProvider(
   }, [currentUser]);
 
   async function addProduct(product: Product) {
-    if (!(product.title in shoppingList)) {
-      setShoppingList((prevState) => ({
-        ...prevState,
-        [product.title]: { ...product, count: 1 },
-      }));
-      try {
-        if (!currentUser) return;
-        const userRef = doc(db, 'users', currentUser.uid);
-        await setDoc(
-          userRef,
-          {
-            cart: {
-              [product.title]: { ...product, count: 1 },
-            },
+    const currentCount = shoppingList[product.title]?.count || 0;
+    setShoppingList((prevState) => ({
+      ...prevState,
+      [product.title]: { ...product, count: currentCount + 1 },
+    }));
+    try {
+      if (!currentUser) return;
+      const userRef = doc(db, 'users', currentUser.uid);
+      await setDoc(
+        userRef,
+        {
+          cart: {
+            [product.title]: { ...product, count: currentCount + 1 },
           },
-          { merge: true }
-        );
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      const updatedProduct = {
-        ...product,
-        count: shoppingList[product.title].count + 1,
-      }; // updating the product
-      setShoppingList((prevState) => ({
-        ...prevState,
-        [product.title]: { ...updatedProduct },
-      }));
-      try {
-        if (!currentUser) return;
-        const userRef = doc(db, 'users', currentUser.uid);
-        await setDoc(
-          userRef,
-          {
-            cart: {
-              [product.title]: updatedProduct,
-            },
-          },
-          { merge: true }
-        );
-      } catch (err) {
-        console.log(err);
-      }
+        },
+        { merge: true }
+      );
+    } catch (err) {
+      console.log(err);
     }
   }
 
   //function to reduce the number of items in the list
   async function reduceProduct(product: Product) {
-    if (
-      product.title in shoppingList &&
-      shoppingList[product.title].count > 0
-    ) {
-      const updatedProduct = {
-        ...product,
-        count: shoppingList[product.title].count - 1,
-      }; // updating the product
-
+    const currentCount = shoppingList[product.title]?.count || 0;
+    if (currentCount > 0) {
       setShoppingList((prevState) => ({
         ...prevState,
-        [product.title]: { ...updatedProduct },
+        [product.title]: {
+          ...product,
+          count: currentCount - 1,
+        },
       }));
+      if (currentCount === 1) {
+        return handleDelete(product);
+      }
       try {
         if (!currentUser) return;
         const userRef = doc(db, 'users', currentUser.uid);
-        await setDoc(
-          userRef,
-          {
-            cart: {
-              [product.title]: { ...updatedProduct },
-            },
+        await setDoc(userRef, {
+          cart: {
+            [product.title]: { ...product, count: currentCount - 1 },
           },
-          { merge: true }
-        );
+        });
       } catch (err) {
         console.log(err);
       }

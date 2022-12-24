@@ -9,7 +9,7 @@ export interface DataProps {
       brand: string;
       description: string;
       discountPercentage: string;
-      id: number;
+      id: string;
       images: string[];
       title: string;
       thumbnail: string;
@@ -36,9 +36,9 @@ export default function Category(data: DataProps) {
   );
 }
 export const getStaticPaths: GetStaticPaths = async () => {
+  //fetching all the categories for category page. this function sets all the path for the url ex:(www.com/category)
   const urls = await fetch('https://dummyjson.com/products/categories');
   const res = await urls.json();
-
   const paths = res.map((product: string) => {
     return {
       params: { cat: product },
@@ -54,7 +54,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const cat: any = context.params!.cat;
   const data = await fetch(`https://dummyjson.com/products/category/${cat}`);
   const res = await data.json();
-
   const products = res.products.map((product: any) => {
     return {
       ...product,

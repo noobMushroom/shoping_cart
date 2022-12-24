@@ -1,4 +1,5 @@
 import HomePage from '../components/HomePage';
+import { LatesProductProps } from './latest/[id]';
 import Head from 'next/head';
 import uuid from 'react-uuid';
 
@@ -37,16 +38,26 @@ export default function Home(props: homeProps) {
   );
 }
 
+interface Product {
+  title: string;
+  image: string;
+  rating: { rate: number; count: number };
+  price: number;
+  description: string;
+  id: number;
+  category: string;
+}
+
 export async function getStaticProps() {
   const data = await fetch('https://fakestoreapi.com/products');
   const response = await data.json();
-  const productData = response.map((product: any) => {
+  const productData = response.map((product: Product) => {
     return {
       count: 0,
       brand: 'lorem ipsum',
       description: product.description,
       discountPercentage: '3',
-      id: Math.random(),
+      id: product.id,
       images: [product.image],
       title: product.title,
       thumbnail: product.image,
