@@ -7,7 +7,7 @@ import Stars from './Ratings';
 
 export default function ProductPage(props: DataProps) {
   const router = useRouter();
-  const { shoppingList, addProduct } = useShoppingList(); // accessing functions to update product values;
+  const { shoppingList, addProduct, reduceProduct } = useShoppingList(); // accessing functions to update product values;
 
   // this fucntion push the route and take two parameters category of the product and name of the product
   function handleClick(category: string, id: number) {
@@ -15,17 +15,17 @@ export default function ProductPage(props: DataProps) {
   }
 
   return (
-    <div className="mt-[5rem] sm:mt-[6rem]">
-      <div className=" text-center  sm:text-5xl sm:my-[1.5rem] playfulFont text-white text-2xl my-[1rem] capitalize font-bold">
+    <div className="pt-[0.5rem] ">
+      <div className=" text-center sm:text-4xl sm:my-[1.5rem] text-2xl my-[1rem] capitalize font-bold">
         {props.name}
       </div>
       {props.data.map((product) => {
         return (
           <div
             key={uuid()}
-            className=" flex flex-col sm:flex-row shadow-2xl w-[95vw] sm:my-[2rem] sm:p-[2rem] sm:w-[70vw] rounded-lg p-[0.5rem] my-[1rem] m-auto bg-zinc-300 items-center"
+            className=" flex flex-col sm:flex-row shadow-2xl w-[95vw] sm:my-[2rem] sm:p-[2rem] sm:w-[70vw] rounded-lg p-[0.5rem] my-[1rem] m-auto bg-gray-100 items-center"
           >
-            <div className="relative h-[12rem] sm:h-[15rem] sm:mr-[1rem] rounded-lg w-full">
+            <div className="relative bg-white h-[12rem] sm:h-[15rem] sm:mr-[1rem] w-full">
               <Image
                 src={product.thumbnail}
                 fill
@@ -34,44 +34,50 @@ export default function ProductPage(props: DataProps) {
                 className="object-contain"
               />
             </div>
-            <div className="flex flex-col w-full sm:pl-[1rem]">
-              <strong className="text-xl my-[0.5rem] playfulFont">
-                {product.brand}
-              </strong>
-              <h1 className="text-xl font-semibold my-[0.2rem] playfulFont">
+            <div className="flex flex-col w-full mt-4 sm:mt-0 sm:pl-[1rem]">
+              <strong className="text-xs text-gray-700">{product.brand}</strong>
+              <h1 className="text-xl sm:text-2xl font-semibold mt-[0.2rem]">
                 {product.title}
               </h1>
               <div>
-                <p>Price: {product.price}$</p>
-                <p>Discount: {product.discountPercentage}%</p>
+                <h1 className="font-bold text-2xl sm:text-4xl my-2 text-red-600">
+                  {new Intl.NumberFormat('en-us', {
+                    style: 'currency',
+                    currency: 'usd',
+                  }).format(product.price)}
+                </h1>
               </div>
-              <div>
-                <Stars num={product.rating} />
-              </div>
-              <div className="flex text-xl">
-                <p className="mr-[0.5rem]">Item in cart: </p>
-                {shoppingList[product.title] ? (
-                  <h1>{shoppingList[product.title].count}</h1>
-                ) : (
-                  <h1>0</h1>
-                )}
-              </div>
-
-              <div className="flex w-full h-[2.5rem] my-[0.5rem] sm:my-[1rem] ">
-                <button
-                  onClick={() => addProduct(product)}
-                  className="w-full mx-[0.5rem] flex items-center sm:hover:scale-110 duration-300 sm:hover:bg-cyan-500 rounded-full justify-center bg-cyan-600 shadow-2xl"
-                >
-                  <i className="fa-solid fa-circle-plus mr-[0.5rem] text-xl"></i>
-                  Add to cart
-                </button>
-                <button
-                  onClick={() => handleClick(product.category, product.id)}
-                  className="w-full bg-red-600 flex items-center sm:hover:scale-110 duration-300 sm:hover:bg-red-500 rounded-full justify-center shadow-2xl "
-                >
-                  <i className="fa-solid fa-circle-info mr-[0.5rem] text-xl "></i>
-                  See Details
-                </button>
+              <div className="flex my-[0.5rem] items-center sm:my-[1rem] gap-4 sm:gap-10 ">
+                <div className="flex items-center text-black sm:text-2xl shadow-lg w-[8rem] h-[2rem] sm:h-[2.5rem] border-2 border-black justify-evenly">
+                  <button
+                    onClick={() => addProduct(product)}
+                    className="border-r-2 border-black bg-red-700 sm:bg-transparent sm:hover:text-red-600 text-center h-[100%] w-full"
+                  >
+                    <i className="fa-solid fa-plus"></i>
+                  </button>
+                  <h1 className="w-full text-center h-[100%] flex items-center justify-center">
+                    {shoppingList[product.title] ? (
+                      <h1>{shoppingList[product.title].count}</h1>
+                    ) : (
+                      <h1>0</h1>
+                    )}
+                  </h1>
+                  <button
+                    onClick={() => reduceProduct(product)}
+                    className="border-l-2 bg-blue-700 sm:bg-transparent border-black sm:hover:text-red-600 w-full h-[100%] text-center"
+                  >
+                    <i className="fa-solid fa-minus"></i>
+                  </button>
+                </div>
+                <div>
+                  <button
+                    onClick={() => handleClick(product.category, product.id)}
+                    className="h-[2rem] uppercase font-bold sm:h-[2.5rem] px-[0.5rem] border-2 border-black text-sm sm:hover:bg-gray-800 sm:hover:text-white sm:hover:border-gray-800 duration-300"
+                  >
+                    <i className="fa-solid fa-info mr-4"></i>
+                    Details
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -80,3 +86,6 @@ export default function ProductPage(props: DataProps) {
     </div>
   );
 }
+
+//onClick={() => handleClick(product.category, product.id)}
+//<i className="fa-solid fa-minus"></i>

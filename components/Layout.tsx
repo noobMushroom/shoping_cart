@@ -10,9 +10,7 @@ export default function Layout(props: layoutProps) {
       <header className="relative flex flex-col justify-center">
         <NavigationBar />
       </header>
-      <main className="w-full bg-gray-200 mt-[5rem]  flex justify-center">
-        {props.children}
-      </main>
+      <main className="w-full bg-gray-200 mt-[5rem]">{props.children}</main>
       <Footer />
     </Fragment>
   );

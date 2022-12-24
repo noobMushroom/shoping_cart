@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const res = await data.json();
   const fomattedProduct = {
     count: 0,
-    brand: 'lorem ipsum',
+    brand: 'cool brand',
     description: res.description,
     discountPercentage: '3',
     id: res.id,

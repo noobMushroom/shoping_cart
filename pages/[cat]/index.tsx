@@ -9,7 +9,7 @@ export interface DataProps {
       brand: string;
       description: string;
       discountPercentage: string;
-      id: string;
+      id: number;
       images: string[];
       title: string;
       thumbnail: string;
