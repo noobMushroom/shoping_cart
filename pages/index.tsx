@@ -1,7 +1,5 @@
 import HomePage from '../components/HomePage';
-import { LatesProductProps } from './latest/[id]';
 import Head from 'next/head';
-import uuid from 'react-uuid';
 
 export interface homeProps {
   products: [
@@ -54,7 +52,7 @@ export async function getStaticProps() {
   const productData = response.map((product: Product) => {
     return {
       count: 0,
-      brand: 'lorem ipsum',
+      brand: 'cool brand',
       description: product.description,
       discountPercentage: '3',
       id: product.id,

@@ -3,54 +3,65 @@ import { useShoppingList } from '../context/ShoppingList';
 import uuid from 'react-uuid';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+
 export default function CartPage() {
-  const router = useRouter();
   const { shoppingList, loading, addProduct, reduceProduct, handleDelete } =
     useShoppingList();
   const { currentUser } = useAuth();
 
   function totalCalculator() {
     let bill = 0;
-    Object.keys(shoppingList).map((product: any) => {
+    Object.keys(shoppingList).forEach((product: any) => {
       bill += shoppingList[product].price * shoppingList[product].count;
     });
     return bill;
   }
-
-  function handleClick(category: string, id: number) {
-    router.push(`/${category}/${id}`);
+  function totalItems() {
+    let items = 0;
+    Object.keys(shoppingList).forEach((product: any) => {
+      items += shoppingList[product].count;
+    });
+    return items;
   }
 
   if (loading) return <div>Loading....</div>;
   return (
-    <div className="w-[100vw] text-black p-[1rem] mt-[3rem] sm:mt-[5rem] min-h-screen mt-[1rem] sm:w-[60rem] sm:m-auto relative">
+    <div className="w-[100vw] text-black p-[0.5rem] sm:p-[1rem] mt-[3rem] sm:mt-[5rem] min-h-screen mt-[1rem] sm:w-[60rem] sm:m-auto relative">
       {currentUser ? (
         <></>
       ) : (
         <div className="p-[0.5rem] sm:w-[60rem] my-[1rem] sm:my-[3rem] flex flex-col items-center justify-center">
-          <div className="flex items-center text-xl sm:text-2xl  justify-center text-red-600">
+          <div className="flex items-center text-xl sm:text-2xl font-bold justify-center text-red-600">
             <i className="fa-solid fa-triangle-exclamation mr-[0.5rem] sm:mr-[1rem]"></i>
             <p>Sign in to save your files</p>
           </div>
-          <div className="mt-[0.5rem] sm:mt[1.5rem]">
-            <Link href={'/login'} className="text-xl sm:text-2xl text-cyan-600">
+          <div className="mt-[0.5rem] sm:mt-[1.5rem]">
+            <Link
+              href={'/login'}
+              className="uppercase sm:px-8 w-[7rem] sm:hover:text-white font-bold border-2 border-zinc-900 p-[0.5rem] text-center sm:hover:bg-zinc-900"
+            >
               Login
             </Link>
           </div>
         </div>
       )}
-      <div className="flex mb-[3rem] w-full border-2 border-orange-600 sm:px-[1rem] sticky sm:text-3xl top-[3.7rem] sm:top-[4.5rem] left-0 bg-stone-800 z-50 rounded-md p-[0.5rem] justify-between items-center">
-        <h1>
+      <div className="flex mb-[3rem] sm:w-[70vw] m-auto shadow-2xl bg-zinc-900 text-white px-4 sm:px-8 sticky sm:text-xl top-[3.7rem] sm:top-[5.1rem] left-0 bg-zinc-200 z-50 p-[0.5rem] justify-between items-center">
+        <h1 className="hidden sm:block">
           <i className="fa-solid fa-cart-shopping mr-[0.5rem] sm:mr-[1rem]"></i>
           Your Cart
         </h1>
         <div className="flex">
-          <h1 className=" mr-[0.5rem] sm:mr-[1rem]">Total:</h1>
-          <h1 className="text-cyan-600 bold">
-            <i className="fa-sharp fa-solid fa-dollar-sign"></i>
-            {totalCalculator()}
+          <h1 className=" mr-[0.5rem] sm:mr-[1rem] text-gray-400">Total:</h1>
+          <h1 className="text-red-500 bold">
+            {Intl.NumberFormat('en-us', {
+              currency: 'usd',
+              style: 'currency',
+            }).format(totalCalculator())}
           </h1>
+        </div>
+        <div className="flex items-center ">
+          <h3 className="sm:mr-2 text-gray-400 mr-[0.4rem]">Total Items:</h3>
+          <h3 className="text-red-500 text-bold">{totalItems()}</h3>
         </div>
       </div>
       <div>
@@ -58,7 +69,7 @@ export default function CartPage() {
           return (
             <div
               key={uuid()}
-              className=" flex flex-col sm:flex-row shadow-2xl w-[95vw] sm:my-[2rem] sm:p-[2rem] sm:w-[70vw] rounded-lg p-[0.5rem] my-[1rem] m-auto bg-gray-100 items-center"
+              className=" flex flex-col sm:flex-row shadow-2xl w-full sm:my-[2rem] sm:p-[2rem] sm:w-[70vw] rounded-lg p-[0.5rem] my-[1rem] m-auto bg-gray-100 items-center"
             >
               <div className="relative bg-white h-[12rem] sm:h-[15rem] sm:mr-[1rem] w-full">
                 <Image
@@ -125,7 +136,7 @@ export default function CartPage() {
                   <div>
                     <button
                       onClick={() => handleDelete(shoppingList[product])}
-                      className="h-[2rem] sm:h-[2.5rem] shadow-lg px-[0.5rem] border-2 border-black text-sm sm:hover:bg-gray-800 sm:hover:text-white sm:hover:border-gray-800 duration-300"
+                      className="h-[2rem] sm:h-[2.5rem] shadow-lg px-[0.2rem] sm:px-[0.5rem] border-2 border-black text-sm sm:hover:bg-gray-800 sm:hover:text-white sm:hover:border-gray-800 duration-300"
                     >
                       Remove Product
                     </button>

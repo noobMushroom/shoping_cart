@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useAuth } from './ContextProvider';
 import { doc, setDoc, deleteField, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -21,20 +21,7 @@ export interface Product {
 
 // interface for state
 export interface StateProps {
-  [title: string]: {
-    count: number;
-    brand: string;
-    description: string;
-    discountPercentage: string;
-    id: number;
-    images: string[];
-    title: string;
-    thumbnail: string;
-    stock: string;
-    rating: number;
-    price: number;
-    category: string;
-  };
+  [title: string]: Product;
 }
 
 interface ShoppingListPorviderInterface {

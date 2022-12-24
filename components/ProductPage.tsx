@@ -47,7 +47,7 @@ export default function ProductPage(props: DataProps) {
                   }).format(product.price)}
                 </h1>
               </div>
-              <div className="flex my-[0.5rem] items-center sm:my-[1rem] gap-4 sm:gap-10 ">
+              <div className="flex my-[0.5rem] items-center sm:my-[1rem] justify-around sm:justify-start gap-4 sm:gap-10 ">
                 <div className="flex items-center text-black sm:text-2xl shadow-lg w-[8rem] h-[2rem] sm:h-[2.5rem] border-2 border-black justify-evenly">
                   <button
                     onClick={() => addProduct(product)}
