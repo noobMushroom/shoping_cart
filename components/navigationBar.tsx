@@ -1,19 +1,39 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/ContextProvider';
+import uuid from 'react-uuid';
 import { useShoppingList } from '../context/ShoppingList';
+
 export default function NavigationBar() {
+  const [categoreis, setCategories] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false); // state to show and close navigation bar;
+  const [loading, setLoading] = useState(true);
   const { shoppingList } = useShoppingList();
   const router = useRouter(); //router to push the links
-
   const { currentUser, logout } = useAuth(); // current logged in user;
+
+  useEffect(() => {
+    const url = 'https://dummyjson.com/products/categories';
+    const catData = async () => {
+      try {
+        const data = await fetch(url);
+        const res = await data.json();
+        setCategories(res);
+        setLoading(false);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    catData();
+  }, []);
 
   // handleclick function to push diffrent routes by button click
   function handleClick(link: string) {
     router.push(link);
   }
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <nav className="w-full h-[3.5rem] sm:h-[5rem] fixed top-0 left-0 shadow-xl top-0 left-0 bg-zinc-100/90 text-black flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[1000] pt-[1rem]">
@@ -54,9 +74,18 @@ export default function NavigationBar() {
             shop
             <i className="fa-solid ml-[0.3rem] fa-chevron-down"></i>
           </Link>
-          <i className="fa-sharp fa-solid fa-caret-up absolute top-[2.4rem] left-[30%] hidden text-red-600"></i>
-          <ul className="absolute top-[3.1rem] w-[60rem] border-t-4 border-red-600 bg-zinc-100 hidden shadow-2xl rounded left-[-20rem]">
-            this is something
+          <i className="fa-sharp fa-solid fa-caret-up absolute top-[2.4rem] left-[30%] text-red-600"></i>
+          <ul className="absolute grid grid-cols-4 gap-6 items-center justify-center p-10 top-[3.1rem] w-[45rem] border-t-4 border-red-600 bg-zinc-100 shadow-2xl rounded left-[-20rem]">
+            {categoreis.map((cat) => {
+              return (
+                <li
+                  className="text-sm capitalize hover:text-red-600"
+                  key={uuid()}
+                >
+                  <Link href={`/${cat}`}>{cat}</Link>
+                </li>
+              );
+            })}
           </ul>
         </li>
         <li>
