@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { useAuth } from '../context/ContextProvider';
 import uuid from 'react-uuid';
 import { useShoppingList } from '../context/ShoppingList';
@@ -10,6 +10,7 @@ export default function NavigationBar() {
   const [isOpen, setIsOpen] = useState(false); // state to show and close navigation bar;
   const [loading, setLoading] = useState(true);
   const { shoppingList } = useShoppingList();
+  const [drpDown, setDrpDown] = useState(false);
   const router = useRouter(); //router to push the links
   const { currentUser, logout } = useAuth(); // current logged in user;
 
@@ -36,12 +37,12 @@ export default function NavigationBar() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <nav className="w-full h-[3.5rem] sm:h-[5rem] fixed top-0 left-0 shadow-xl top-0 left-0 bg-zinc-100/90 text-black flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[1000] pt-[1rem]">
+    <nav className="w-full h-[3.5rem] sm:h-[5rem] justify-between fixed top-0 left-0 shadow-xl top-0 left-0 bg-zinc-100/90 text-black flex items-center p-[0.5rem] sm:p-[1rem] text-xl text-black z-[1000] pt-[1rem]">
       <div>
         <Link
           href={'/'}
           onClick={() => setIsOpen(false)}
-          className=" select-none text-2xl text-rose-600 uppercase sm:font-bold sm:text-xl"
+          className=" select-none text-base font-bold text-rose-600 uppercase sm:text-xl"
         >
           Simply Stylish
         </Link>
@@ -57,7 +58,6 @@ export default function NavigationBar() {
             )}
           </button>
         </li>
-
         <li>
           <Link
             href="/"
@@ -66,31 +66,38 @@ export default function NavigationBar() {
             Home
           </Link>
         </li>
-        <li className="relative">
-          <Link
-            href="/"
-            className="hover:text-rose-600 flex itmes-center text-sm uppercase duration-100 hidden sm:block font-semibold"
-          >
+        <button onClick={() => setDrpDown(!drpDown)} className="relative">
+          <h1 className="hover:text-rose-600 flex itmes-center text-sm uppercase duration-100 hidden sm:block font-semibold">
             shop
-            <i className="fa-solid ml-[0.3rem] fa-chevron-down"></i>
-          </Link>
-          <i className="fa-sharp fa-solid fa-caret-up absolute top-[2.4rem] left-[30%] text-red-600"></i>
-          <ul className="absolute grid grid-cols-4 gap-6 items-center justify-center p-10 top-[3.1rem] w-[45rem] border-t-4 border-red-600 bg-zinc-100 shadow-2xl rounded left-[-20rem]">
-            {categoreis.map((cat) => {
-              return (
-                <li
-                  className="text-sm capitalize hover:text-red-600"
-                  key={uuid()}
-                >
-                  <Link href={`/${cat}`}>{cat}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </li>
+            {drpDown ? (
+              <i className="fa-solid fa-chevron-up ml-[0.3rem]"></i>
+            ) : (
+              <i className="fa-solid ml-[0.3rem] fa-chevron-down"></i>
+            )}
+          </h1>
+          {drpDown ? (
+            <Fragment>
+              <i className="fa-sharp fa-solid fa-caret-up absolute top-[2.4rem] left-[30%] text-red-600 "></i>
+              <ul className="absolute grid grid-cols-4 gap-6 items-center  durtaion-300 justify-center p-10 top-[3.1rem] dropdown__menu w-[45rem] border-t-4 border-red-600 bg-zinc-100 shadow-2xl rounded left-[-20rem]">
+                {categoreis.map((cat) => {
+                  return (
+                    <li
+                      className="text-sm capitalize hover:text-red-600 duration-300"
+                      key={uuid()}
+                    >
+                      <Link href={`/${cat}`}>{cat}</Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Fragment>
+          ) : (
+            <></>
+          )}
+        </button>
         <li>
           <Link
-            href="/"
+            href="/contact"
             className="hover:text-rose-600 text-sm uppercase duration-100 font-semibold hidden sm:block"
           >
             Contact
@@ -98,7 +105,7 @@ export default function NavigationBar() {
         </li>
         <li>
           <Link
-            href="/"
+            href="/aboutUs"
             className="hover:text-rose-600 text-sm uppercase duration-100 font-semibold  hidden sm:block"
           >
             About
@@ -113,7 +120,7 @@ export default function NavigationBar() {
         </button>
 
         {/* button for login */}
-        <div className="flex items-center">
+        <div className="flex items-center hidden sm:block">
           <div className="ml-[0.5rem]">
             {currentUser ? (
               <button onClick={() => handleClick('/userInfo')}>
@@ -132,40 +139,38 @@ export default function NavigationBar() {
         {/* div for responsive panel */}
       </ul>
       {isOpen && (
-        <div className="absolute top-12  duration-300 sm:hidden text-black text-xl text-white flex flex-col items-center left-0 w-full bg-slate-900 flex-1 py-[1rem]">
-          <Link
-            href={currentUser ? '/userInfo' : '/login'}
-            className="text-white my-[0.5rem]"
-            onClick={() => setIsOpen(false)}
-          >
-            {currentUser ? currentUser.displayName : 'Login'}
-          </Link>
-          <Link
-            className="my-[0.5rem] flex items-center text-white"
-            href={'/cart'}
-            onClick={() => setIsOpen(false)}
-          >
-            <i className="fa-solid fa-cart-shopping"></i>
-            <h1 className="ml-[0.5rem]">
-              {Object.keys(shoppingList).length} items
-            </h1>
-          </Link>
-          <Link
-            onClick={() => setIsOpen(false)}
-            className="my-[0.5rem] text-white"
-            href={'/aboutUs'}
-          >
-            About us
-          </Link>
-          <button
-            onClick={() => {
-              logout();
-              setIsOpen(false);
-            }}
-            className="my-[0.5rem] text-white"
-          >
-            {currentUser ? 'Logout' : <></>}
-          </button>
+        <div className="absolute top-12 duration-300 sm:hidden text-black flex flex-col items-center left-0 w-full bg-zinc-200 flex-1 p-[0.5rem]">
+          <div className="flex text-base w-full justify-around">
+            <Link
+              href={currentUser ? '/userInfo' : '/login'}
+              className=" my-[0.5rem]"
+              onClick={() => setIsOpen(false)}
+            >
+              {currentUser ? currentUser.displayName : 'Login'}
+            </Link>
+            <Link
+              className="my-[0.5rem] flex items-center"
+              href={'/cart'}
+              onClick={() => setIsOpen(false)}
+            >
+              <i className="fa-solid fa-cart-shopping"></i>
+              <h1 className="ml-[0.5rem]">
+                {Object.keys(shoppingList).length} Items
+              </h1>
+            </Link>
+          </div>
+          <div className="w-full">
+            <h1 className="text-base text-bold text-gray-700">Categories</h1>
+            <ul className="grid grid-cols-2 text-sm mt-4 gap-y-4 items-center justify-center">
+              {categoreis.map((item, index) => {
+                return (
+                  <li onClick={() => setIsOpen(!isOpen)} key={index}>
+                    <Link href={`/${item}`}>{item}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       )}
     </nav>

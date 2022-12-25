@@ -45,7 +45,7 @@ export default function CartPage() {
           </div>
         </div>
       )}
-      <div className="flex mb-[3rem] sm:w-[70vw] m-auto shadow-2xl bg-zinc-900 text-white px-4 sm:px-8 sticky sm:text-xl top-[3.7rem] sm:top-[5.1rem] left-0 bg-zinc-200 z-50 p-[0.5rem] justify-between items-center">
+      <div className="flex mb-[3rem] sm:w-[70vw] m-auto shadow-2xl bg-zinc-900 text-white px-4 sm:px-8 sticky sm:text-xl top-[3.7rem] sm:top-[5.1rem] left-0 z-50 p-[0.5rem] justify-between items-center">
         <h1 className="hidden sm:block">
           <i className="fa-solid fa-cart-shopping mr-[0.5rem] sm:mr-[1rem]"></i>
           Your Cart

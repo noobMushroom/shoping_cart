@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'proximaSoft';
-  src: url('../public/font/ProximaSoft-Regular.ttf');
-}
 * {
   font-family: 'Arimo', sans-serif;
 }
@@ -28,10 +24,10 @@
   );
 }
 
-.playfulFont {
-  font-family: 'Playfair Display', serif;
-}
-
 .arimoFont {
   font-family: 'Arimo', sans-serif;
+}
+
+.drpContainer:hover .dropdown__menu {
+  display: block;
 }

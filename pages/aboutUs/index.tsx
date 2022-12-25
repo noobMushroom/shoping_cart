@@ -1,10 +1,12 @@
 export default function AboutUs() {
   return (
-    <div className="mt-[5rem] text-white w-[100vw] p-[0.5rem] text-center">
+    <div className="pt-[5rem] min-h-screen w-full p-[0.5rem] p-[0.5rem] sm:p-[1rem] text-center">
       <div>
-        <h1 className="text-2xl mb-[1rem]">This is a Dummy webiste</h1>
+        <h1 className="sm:text-2xl text-gray-700 mb-[1rem]">
+          This is a Dummy webiste
+        </h1>
       </div>
-      <div>
+      <div className="text-sm">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae
