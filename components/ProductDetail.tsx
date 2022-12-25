@@ -43,20 +43,20 @@ export default function ProductDetails(data: ProductProps) {
           </div>
 
           <div className="flex items-center mt-8 mb-10 sm:mt-10 sm:mb-12 gap-4 sm:gap-14">
-            <div className="flex items-center text-black sm:text-2xl shadow-lg w-[10rem] h-[2.5rem] sm:h-[3rem]  border-2 border-black justify-evenly">
+            <div className="flex items-center text-black sm:text-2xl shadow-lg w-[10rem] h-[3rem] border-2 border-black justify-evenly">
               <button
                 onClick={() => addProduct(data)}
                 className="border-r-2 border-black bg-red-700 sm:bg-transparent sm:hover:text-red-600 text-center h-[100%] w-full"
               >
                 <i className="fa-solid fa-plus"></i>
               </button>
-              <h1 className="w-full text-center h-[100%] flex items-center justify-center">
+              <span className="w-full text-center h-[100%] flex items-center justify-center">
                 {shoppingList[data.title] ? (
                   <h1>{shoppingList[data.title].count}</h1>
                 ) : (
                   <h1>0</h1>
                 )}
-              </h1>
+              </span>
               <button
                 onClick={() => reduceProduct(data)}
                 className="border-l-2 bg-blue-700 sm:bg-transparent border-black sm:hover:text-red-600 w-full h-[100%] text-center"
@@ -64,14 +64,17 @@ export default function ProductDetails(data: ProductProps) {
                 <i className="fa-solid fa-minus"></i>
               </button>
             </div>
-            <div>
+            {shoppingList[data.title] ? (
               <button
                 onClick={() => handleDelete(data)}
-                className="h-[2.5rem] sm:h-[3rem] px-[0.5rem] border-2 border-black text-sm sm:hover:bg-gray-800 sm:hover:text-white sm:hover:border-gray-800 duration-300"
+                className="h-[3rem] px-[0.5rem] border-2 border-black text-sm sm:hover:bg-gray-800 sm:hover:text-white sm:hover:border-gray-800 duration-300"
               >
                 Remove Product
               </button>
-            </div>
+            ) : (
+              <></>
+            )}
+            <div></div>
           </div>
           <div className="flex items-center">
             <h3 className="mr-2 font-bold capitalize">category:</h3>

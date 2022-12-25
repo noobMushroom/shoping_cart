@@ -131,14 +131,14 @@ export default function HomePage(props: homeProps) {
                     );
                   })}
                   <div className="z-[999] font-black text-xl bg-black/20 sm:opacity-0 sm:bg-neutral-900/80 flex duration-300 ease-in-out hover:opacity-100 items-end justify-center top-0 left-0 right-0 bottom-0 absolute">
-                    <div className="flex items-center text-black sm:text-white mb-[1rem] sm:mb-[3rem] shadow-2xl w-[7rem] sm:w-[8rem] h-[2rem] border-2  border-black sm:border-white justify-evenly">
+                    <div className="flex items-center text-black sm:text-white mb-[1rem] sm:mb-[3rem] shadow-2xl w-[8rem] h-[2.5rem] sm:h-[2rem] border-2  border-black sm:border-white justify-evenly">
                       <button
                         onClick={() => addProduct(product)}
                         className="border-r-2 border-black bg-red-700 text-white sm:bg-transparent sm:border-white sm:hover:text-red-600 text-center h-[100%] w-full"
                       >
                         <i className="fa-solid fa-plus"></i>
                       </button>
-                      <h1 className="w-full text-center h-[100%]">
+                      <h1 className="w-full flex items-center justify-center text-center h-[100%]">
                         {shoppingList[product.title] ? (
                           <h1>{shoppingList[product.title].count}</h1>
                         ) : (
