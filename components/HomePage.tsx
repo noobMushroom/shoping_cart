@@ -8,25 +8,12 @@ import productImage2 from '../public/irene-kredenets-dwKiHoqqxk8-unsplash.jpg';
 import productImage3 from '../public/giorgio-trovato-K62u25Jk6vo-unsplash.jpg';
 import productImage4 from '../public/wiser-by-the-mile-SwWCo1k92M4-unsplash.jpg';
 import productImage5 from '../public/lukenn-sabellano-BJZeNGkGuaU-unsplash.jpg';
-interface PropType {
-  products: [
-    {
-      title: string;
-      image: string;
-      rating: { rate: number; count: number };
-      price: number;
-      description: string;
-      id: number;
-      category: string;
-    }
-  ];
-}
 
 export default function HomePage(props: homeProps) {
   const router = useRouter();
   const { addProduct, reduceProduct, shoppingList } = useShoppingList();
   return (
-    <div className="w-[100%]">
+    <div className="w-[100%] pb-[1rem]">
       <div>
         <Background />
       </div>
