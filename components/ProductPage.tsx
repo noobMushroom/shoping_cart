@@ -47,7 +47,7 @@ export default function ProductPage(props: DataProps) {
                 </h1>
               </div>
               <div className="flex my-[0.5rem] items-center sm:my-[1rem] sm:justify-start gap-4 sm:gap-10 ">
-                <div className="flex items-center text-black sm:text-2xl shadow-lg w-[8rem] h-[2rem] sm:h-[2.5rem] border-2 border-black justify-evenly">
+                <div className="flex items-center text-black sm:text-2xl shadow-lg w-[8rem] h-[2.5rem] border-2 border-black justify-evenly">
                   <button
                     onClick={() => addProduct(product)}
                     className="border-r-2 border-black bg-red-700 sm:bg-transparent sm:hover:text-red-600 text-center h-[100%] w-full"
@@ -71,7 +71,7 @@ export default function ProductPage(props: DataProps) {
                 <div>
                   <button
                     onClick={() => handleClick(product.category, product.id)}
-                    className="h-[2rem] uppercase font-bold sm:h-[2.5rem] px-[0.5rem] border-2 border-black text-sm sm:hover:bg-gray-800 sm:hover:text-white sm:hover:border-gray-800 duration-300"
+                    className=" uppercase font-bold h-[2.5rem] px-[0.5rem] border-2 border-black text-sm sm:hover:bg-gray-800 sm:hover:text-white sm:hover:border-gray-800 duration-300"
                   >
                     <i className="fa-solid fa-info mr-4"></i>
                     Details

@@ -159,8 +159,10 @@ export default function NavigationBar() {
               </h1>
             </Link>
           </div>
-          <div className="w-full">
-            <h1 className="text-base text-bold text-gray-700">Categories</h1>
+          <div className="w-full mt-[1rem] pb-[1rem]">
+            <h1 className="text-base text-bold text-gray-700 uppercase">
+              Categories
+            </h1>
             <ul className="grid grid-cols-2 text-sm mt-4 gap-y-4 items-center justify-center">
               {categoreis.map((item, index) => {
                 return (
