@@ -20,7 +20,7 @@ export default function HomePage(props: homeProps) {
       <div className="sm:w-[90%] select-none sm:mt-[5rem] sm:m-auto">
         <div className="text-center hidden sm:block">
           <div>
-            <h1 className="capitalize text-bold text-4xl mb-[2rem]">
+            <h1 id="start" className="capitalize text-bold text-4xl mb-[2rem]">
               Welcome to simply stylish
             </h1>
           </div>
