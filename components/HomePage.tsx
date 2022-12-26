@@ -114,10 +114,7 @@ export default function HomePage(props: homeProps) {
           {props.products.map((product) => {
             return (
               <div key={product.id}>
-                <div
-                  onClick={() => router.push(`/latest/${product.id}`)}
-                  className="relative h-[15rem] sm:h-[20rem] mb-[0.4rem] cursor-pointer bg-white sm:w-full sm:p-[1rem]"
-                >
+                <div className="relative h-[15rem] sm:h-[20rem] mb-[0.4rem] cursor-pointer bg-white sm:w-full sm:p-[1rem]">
                   {product.images.map((el) => {
                     return (
                       <Image
@@ -130,8 +127,18 @@ export default function HomePage(props: homeProps) {
                       />
                     );
                   })}
-                  <div className="z-[999] font-black text-xl bg-black/20 sm:opacity-0 sm:bg-neutral-900/80 flex duration-300 ease-in-out hover:opacity-100 items-end justify-center top-0 left-0 right-0 bottom-0 absolute">
-                    <div className="flex items-center text-black sm:text-white mb-[1rem] sm:mb-[3rem] shadow-2xl w-[8rem] h-[2.5rem] sm:h-[2rem] border-2  border-black sm:border-white justify-evenly">
+                  <div className="font-black text-xl bg-black/20 sm:opacity-0 sm:bg-neutral-900/80 flex duration-300 ease-in-out hover:opacity-100 items-end justify-center top-0 left-0 right-0 bottom-0 absolute">
+                    <div>
+                      <button
+                        onClick={() => router.push(`/latest/${product.id}`)}
+                        className="flex flex-col m-auto absolute text-white sm:hover:text-red-500 z-[999] top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] justify-center items-center"
+                      >
+                        <i className="fa-regular fa-eye p-[0.5rem] border-2 border-white sm:hover:border-red-500 mb-1"></i>
+                        <span className="text-xs">Quick View</span>
+                      </button>
+                    </div>
+
+                    <div className="flex items-center text-black sm:text-white mb-[1rem] sm:mb-[3rem] shadow-2xl w-[10rem] h-[2.5rem] z-[999] h-[2rem] border-2  border-black sm:border-white justify-evenly">
                       <button
                         onClick={() => addProduct(product)}
                         className="border-r-2 border-black bg-red-700 text-white sm:bg-transparent sm:border-white sm:hover:text-red-600 text-center h-[100%] w-full"
