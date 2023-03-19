@@ -11,9 +11,6 @@ export default function Footer() {
         </Link>
       </div>
       <div className=" flex items-center text-base">
-        <Link href="https://github.com/noobMushroom/shoping_cart.git">
-          <i className="fa-brands fa-github-alt text-cyan-600 text-xl mr-[1rem]"></i>
-        </Link>
         &copy; Created by Mushroom
       </div>
     </footer>
