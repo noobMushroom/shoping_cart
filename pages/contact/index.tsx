@@ -19,24 +19,6 @@ export default function Contact() {
             <i className="fa-solid fa-at mr-3 text-gray-600"></i>
             <h5>mivecol397@khaxan.com</h5>
           </div>
-          <div className="flex items-center mb-2">
-            <i className="fa-brands fa-instagram mr-3 text-gray-600"></i>
-            <span>rey_0200</span>
-          </div>
-          <div className="flex items-center mb-2">
-            <i className="fa-brands fa-twitter mr-3 text-gray-600"></i>
-            <span>@kandy1900</span>
-          </div>
-          <div className="flex items-center mb-2">
-            <i className="fa-brands fa-github-alt mr-3 text-gray-600"></i>
-            <Link
-              href={'https://github.com/noobMushroom/shoping_cart'}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              noobMushroom
-            </Link>
-          </div>
         </div>
       </div>
     </div>
